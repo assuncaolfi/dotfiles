@@ -1,8 +1,13 @@
 " Edit
+inoremap bbf FALSE
+inoremap bbt TRUE
+inoremap ccb ]
+inoremap ccp )
 inoremap dd <Space><-<Space>
-inoremap ff function(
 inoremap nn ::
 inoremap pp <Space>%>%<CR>
+inoremap oob [
+inoremap oop (
 inoremap uu _
 
 " Indent
