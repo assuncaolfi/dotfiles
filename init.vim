@@ -39,5 +39,12 @@ set tabstop=2
 
 " Theme
 syntax enable
-set background=dark
 colorscheme solarized
+let hr = (strftime('%H'))
+if hr >= 18
+set background=dark
+elseif hr >= 6
+set background=light
+elseif hr >= 0
+set background=dark
+endif
