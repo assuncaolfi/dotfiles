@@ -28,17 +28,16 @@ Plug 'altercation/vim-colors-solarized'
 call plug#end
 
 " Split
+nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
 
 " Tab
-set expandtab
 set tabstop=2
+set expandtab
 
 " Theme
-syntax enable
 colorscheme solarized
 let hr = (strftime('%H'))
 if hr >= 18
@@ -48,3 +47,4 @@ elseif hr >= 6
 elseif hr >= 0
   set background=dark
 endif
+syntax enable
