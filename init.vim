@@ -55,5 +55,6 @@ elseif hr >= 0
   set background=dark
 endif
 colorscheme solarized
+let g:solarized_termcolors=256
 " set cursorline
 " hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
