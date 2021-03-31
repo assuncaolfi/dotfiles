@@ -54,8 +54,10 @@ elseif hr >= 6
 elseif hr >= 0
   set background=dark
 endif
-set termguicolors
-let g:solarized_termcolors=256
-colorscheme solarized
+if $TERM == "xterm"
+    colorscheme default
+else
+    colorscheme solarized
+endif
 " set cursorline
 " hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
