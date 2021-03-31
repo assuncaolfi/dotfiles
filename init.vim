@@ -54,7 +54,8 @@ elseif hr >= 6
 elseif hr >= 0
   set background=dark
 endif
-colorscheme solarized
+set termguicolors
 let g:solarized_termcolors=256
+colorscheme solarized
 " set cursorline
 " hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
