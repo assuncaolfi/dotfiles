@@ -33,9 +33,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 
-" Tab
-set tabstop=2
+" Indent
+filetype plugin indent on
+set autoindent
 set expandtab
+set tabstop=2
 
 " Theme
 colorscheme solarized
