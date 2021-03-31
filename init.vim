@@ -37,10 +37,11 @@ nnoremap <C-L> <C-W><C-L>
 filetype plugin indent on
 set autoindent
 set expandtab
+set shiftwidth=2
 set tabstop=2
 
 " Theme
-colorscheme solarized
+syntax enable
 let hr = (strftime('%H'))
 if hr >= 18
   set background=dark
@@ -49,4 +50,4 @@ elseif hr >= 6
 elseif hr >= 0
   set background=dark
 endif
-syntax enable
+colorscheme solarized
