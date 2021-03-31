@@ -35,9 +35,9 @@ nnoremap <C-H> <C-W><C-H>
 
 " Tab
 set expandtab
+set tabstop=2
 
 " Theme
 syntax enable
 set background=dark
 colorscheme solarized
-set tabstop=2
