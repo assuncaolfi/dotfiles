@@ -24,6 +24,7 @@ let g:netrw_winsize = 25
 " Plug
 call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+Plug 'altercation/vim-colors-solarized'
 call plug#end
 
 " Split
@@ -34,4 +35,9 @@ nnoremap <C-H> <C-W><C-H>
 
 " Tab
 set expandtab
+
+" Theme
+syntax enable
+set background=dark
+colorscheme solarized
 set tabstop=2
