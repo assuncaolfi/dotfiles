@@ -2,7 +2,7 @@
 inoremap dd <Space><-<Space>
 inoremap ff function(
 inoremap nn ::
-inoremap pp %>%<CR>
+inoremap pp <Space>%>%<CR>
 inoremap uu _
 
 " Indent
