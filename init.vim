@@ -1,6 +1,6 @@
 " Edit
-inoremap <C-D> <-
-inoremap <C-P> %>%
+inoremap <C-D>  <- 
+inoremap <C-P> %>%<CR>
 inoremap <C-U> _
 
 " Indent
