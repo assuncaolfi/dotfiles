@@ -1,7 +1,7 @@
 " Edit
-:inoremap <C-D> <-
-:inoremap <C-P> %>%
-:inoremap <C-U> _
+inoremap <C-D> <-
+inoremap <C-P> %>%
+inoremap <C-U> _
 
 " Indent
 filetype plugin indent on
