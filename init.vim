@@ -1,7 +1,9 @@
 " Edit
 inoremap dd <Space><-<Space>
+inoremap ff function(
+inoremap nn ::
 inoremap pp %>%<CR>
-inoremap uu <C-U> _
+inoremap uu _
 
 " Indent
 filetype plugin indent on
