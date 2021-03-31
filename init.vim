@@ -1,7 +1,7 @@
 " Edit
-inoremap <C-D>  <- 
-inoremap <C-P> %>%<CR>
-inoremap <C-U> _
+inoremap dd <Space><-<Space>
+inoremap pp %>%<CR>
+inoremap uu <C-U> _
 
 " Indent
 filetype plugin indent on
