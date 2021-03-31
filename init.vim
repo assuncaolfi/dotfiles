@@ -42,9 +42,9 @@ syntax enable
 colorscheme solarized
 let hr = (strftime('%H'))
 if hr >= 18
-set background=dark
+  set background=dark
 elseif hr >= 6
-set background=light
+  set background=light
 elseif hr >= 0
-set background=dark
+  set background=dark
 endif
