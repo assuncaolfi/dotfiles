@@ -1,3 +1,8 @@
+" Edit
+:inoremap <C-D> <-
+:inoremap <C-P> %>%
+:inoremap <C-U> _
+
 " Indent
 filetype plugin indent on
 set autoindent
@@ -10,8 +15,7 @@ set number
 set relativenumber
 
 " Macro
-let @b = 'f,a^M^['
-let @p = 'i%>%^M^['
+let @b = "f,a\<Enter>\<Esc>"
 
 " Mouse
 set mouse=n
@@ -31,7 +35,7 @@ let g:netrw_winsize = 25
 " Plug
 call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-Plug 'altercation/vim-colors-solarized', {'as': 'dracula'}
+Plug 'altercation/vim-colors-solarized', {'as': 'solarized'}
 call plug#end()
 
 " Split
