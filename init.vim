@@ -55,5 +55,5 @@ elseif hr >= 0
   set background=dark
 endif
 colorscheme solarized
-set cursorline
-hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
+" set cursorline
+" hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
