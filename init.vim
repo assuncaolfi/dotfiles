@@ -1,4 +1,11 @@
-" Display
+" Indent
+filetype plugin indent on
+set autoindent
+set expandtab
+set shiftwidth=2
+set tabstop=2
+
+" Line
 set number
 set relativenumber
 
@@ -33,13 +40,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 
-" Indent
-filetype plugin indent on
-set autoindent
-set expandtab
-set shiftwidth=2
-set tabstop=2
-
 " Theme
 syntax enable
 let hr = (strftime('%H'))
@@ -51,3 +51,5 @@ elseif hr >= 0
   set background=dark
 endif
 colorscheme solarized
+set cursorline
+hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
