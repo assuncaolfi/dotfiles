@@ -4,6 +4,7 @@ cd neovim &&
 make CMAKE_BUILD_TYPE=RelWithDebInfo &&
 sudo make install &&
 cd .. &&
+rm -r -f neovim &&
 cp init.vim ~/.config/nvim/init.vim &&
 
 # vim-plug
