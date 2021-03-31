@@ -31,7 +31,7 @@ let g:netrw_winsize = 25
 " Plug
 call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-Plug 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized', {'as': 'dracula'}
 call plug#end()
 
 " Split
