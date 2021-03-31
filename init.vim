@@ -32,6 +32,10 @@ let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 let g:netrw_liststyle = 1
 let g:netrw_winsize = 25
 
+" Nvim-R
+autocmd FileType r setlocal sw=2
+let r_indent_align_args = 0
+
 " Plug
 call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
