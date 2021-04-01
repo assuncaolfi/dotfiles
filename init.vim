@@ -1,14 +1,16 @@
 " Edit
-inoremap bbf FALSE
-inoremap bbt TRUE
-inoremap ccb ]
-inoremap ccp )
-inoremap dd <Space><-<Space>
-inoremap nn ::
-inoremap pp <Space>%>%<CR>
-inoremap oob [
-inoremap oop (
-inoremap uu _
+inoremap ;a +
+inoremap ;cb }
+inoremap ;cp )
+inoremap ;d <Space><-<Space>
+inoremap ;f FALSE
+inoremap ;m *
+inoremap ;n ::
+inoremap ;ob {
+inoremap ;op (
+inoremap ;p <Space>%>%<CR>
+inoremap ;t TRUE
+inoremap ;u _
 
 " Indent
 filetype plugin indent on
