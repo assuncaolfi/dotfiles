@@ -9,6 +9,7 @@ inoremap ;n ::
 inoremap ;ob {
 inoremap ;op (
 inoremap ;p <Space>%>%<CR>
+inoremap ;q "
 inoremap ;t TRUE
 inoremap ;u _
 
