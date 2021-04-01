@@ -72,5 +72,9 @@ if $TERM == "xterm"
 else
     colorscheme solarized
 endif
-" set cursorline
-" hi CursorLine   cterm=NONE ctermbg=8 ctermfg=NONE
+set cursorline
+augroup cursorline
+  au!
+  au ColorScheme * hi clear CursorLine
+               \ | hi link CursorLine CursorColumn
+augroup END
