@@ -51,7 +51,7 @@ let @c = "f,a\<Enter>\<Esc>"
 let @s = "i# \<Esc>78i-\<Esc>0la"
 
 " Mouse
-set mouse=n
+set mouse=a
 
 " netrw
 augroup ProjectDrawer
