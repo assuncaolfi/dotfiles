@@ -1,17 +1,25 @@
 " Edit
-inoremap ;a +
-inoremap ;cb }
-inoremap ;cp )
-inoremap ;d <Space><-<Space>
-inoremap ;f FALSE
-inoremap ;m *
-inoremap ;n ::
-inoremap ;ob {
-inoremap ;op (
-inoremap ;p <Space>%>%<CR>
-inoremap ;q "
-inoremap ;t TRUE
-inoremap ;u _
+"" General
+let mapleader = "\\"
+nnoremap <C-C> <Esc>
+tnoremap <Esc> <C-\><C-n>
+"" Insert
+inoremap <leader>a function(x)<Space>
+inoremap <leader>cp )
+inoremap <leader>cb }
+inoremap <leader>d <Space><-<Space>
+inoremap <leader>f FALSE
+inoremap <leader>n ::
+inoremap <leader>op (
+inoremap <leader>ob {
+inoremap <leader>p <Space>%>%<CR>
+inoremap <leader>t TRUE
+inoremap <leader>u _
+"" Split
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 
 " Indent
 filetype plugin indent on
@@ -33,11 +41,14 @@ set nohlsearch
 set nowrap
 set number
 set relativenumber
-set scrolloff=8
+set scrolloff=20
 set termguicolors
 
 " Macro
-let @b = "f,a\<Enter>\<Esc>"
+let @p = "f(a\<Enter>\<Esc>"
+let @P = "f)a\<Enter>\<Esc>"
+let @c = "f,a\<Enter>\<Esc>"
+let @s = "i# \<Esc>78i-\<Esc>0la"
 
 " Mouse
 set mouse=n
@@ -47,30 +58,27 @@ augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :Vexplore
 augroup END
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 let g:netrw_altv = 1
 let g:netrw_banner = 0
 let g:netrw_browse_split = 4
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 let g:netrw_liststyle = 1
 let g:netrw_winsize = 25
 
 " Nvim-R
 autocmd FileType r setlocal sw=2
 let r_indent_align_args = 0
+let g:rout_follow_colorscheme = 1
+let g:Rout_more_colors = 1
 
 " Plug
 call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-Plug 'altercation/vim-colors-solarized', {'as': 'solarized'}
-Plug 'gruvbox-community/gruvbox', {'as': 'gruvbox'}
 Plug 'romainl/flattened'
+" Plug 'roxma/nvim-completion-manager'
+" Plug 'gaalcaras/ncm-R'
+" Plug 'w0rp/ale'
 call plug#end()
-
-" Split
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
 
 " Theme
 syntax enable
