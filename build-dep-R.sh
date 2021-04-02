@@ -2,6 +2,7 @@
 
 apt-get update
 apt-get install -y \ 
+  # R dependencies
   build-essential \
   fort77 \ 
   xorg-dev \ 
@@ -19,6 +20,7 @@ apt-get install -y \
   default-jdk \ 
   openjdk-8-jdk \ 
   openjdk-8-jre \
+  # R libraries dependencies
   libssl-dev \
   zlib1g-dev \
   libsodium-dev \

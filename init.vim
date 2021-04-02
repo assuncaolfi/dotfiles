@@ -75,6 +75,7 @@ let g:Rout_more_colors = 1
 call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'romainl/flattened'
+Plug 'tpope/vim-fugitive'
 " Plug 'roxma/nvim-completion-manager'
 " Plug 'gaalcaras/ncm-R'
 " Plug 'w0rp/ale'
