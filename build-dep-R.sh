@@ -1,3 +1,5 @@
+#!/bin/bash
+
 apt-get update
 apt-get install -y \ 
   build-essential \
@@ -21,4 +23,3 @@ apt-get install -y \
   zlib1g-dev \
   libsodium-dev \
   libxml2-dev
-
