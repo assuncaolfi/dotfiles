@@ -20,9 +20,21 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
-" Line
+" Buffer and History
+set hidden 
+set noswapfile
+set nobackup
+set updatetime=50
+
+" Display
+set colorcolumn=80
+set incsearch
+set nohlsearch
+set nowrap
 set number
 set relativenumber
+set scrolloff=8
+set termguicolors
 
 " Macro
 let @b = "f,a\<Enter>\<Esc>"
@@ -50,6 +62,8 @@ let r_indent_align_args = 0
 call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'altercation/vim-colors-solarized', {'as': 'solarized'}
+Plug 'gruvbox-community/gruvbox', {'as': 'gruvbox'}
+Plug 'romainl/flattened'
 call plug#end()
 
 " Split
@@ -62,16 +76,11 @@ nnoremap <C-L> <C-W><C-L>
 syntax enable
 let hr = (strftime('%H'))
 if hr >= 18
-  set background=dark
+  colorscheme flattened_dark 
 elseif hr >= 6
-  set background=light
+  colorscheme flattened_light 
 elseif hr >= 0
-  set background=dark
-endif
-if $TERM == "xterm"
-    colorscheme default
-else
-    colorscheme solarized
+  colorscheme flattened_dark 
 endif
 set cursorline
 augroup cursorline
