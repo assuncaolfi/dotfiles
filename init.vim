@@ -4,17 +4,13 @@ let mapleader = "\\"
 nnoremap <C-C> <Esc>
 tnoremap <Esc> <C-\><C-n>
 "" Insert
-inoremap <leader>a function(x)<Space>
-inoremap <leader>cp )
-inoremap <leader>cb }
-inoremap <leader>d <Space><-<Space>
-inoremap <leader>f FALSE
-inoremap <leader>n ::
-inoremap <leader>op (
-inoremap <leader>ob {
-inoremap <leader>p <Space>%>%<CR>
-inoremap <leader>t TRUE
-inoremap <leader>u _
+inoremap 5a <Space><-<Space>
+inoremap 5f FALSE
+inoremap 5l lapply(
+inoremap 5n ::
+inoremap 5p <Space>%>%<CR>
+inoremap 5t TRUE
+inoremap 5u _
 "" Split
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
@@ -76,10 +72,14 @@ call plug#begin('~/.local/shared/nvim/plugged')
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'romainl/flattened'
 Plug 'tpope/vim-fugitive'
+" Plug 'ervndew/supertab'
 " Plug 'roxma/nvim-completion-manager'
 " Plug 'gaalcaras/ncm-R'
 " Plug 'w0rp/ale'
 call plug#end()
+
+" Supertab
+" let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 " Theme
 syntax enable
