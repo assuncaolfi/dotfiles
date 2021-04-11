@@ -1,0 +1,25 @@
+From 645a226ea3671c328d4fbdda8dadf3f2bf36d9aa Mon Sep 17 00:00:00 2001
+From: assuncaolfi <assuncaolfi@gmail.com>
+Date: Sun, 11 Apr 2021 18:12:09 -0300
+Subject: [PATCH] change default font to Hasklig Regular
+
+---
+ config.def.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config.def.h b/config.def.h
+index 6f05dce..1e606b9 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -5,7 +5,7 @@
+  *
+  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
+  */
+-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
++static char *font = "Hasklig:Regular:pixelsize=12:antialias=true:autohint=true";
+ static int borderpx = 2;
+ 
+ /*
+-- 
+2.31.1
+
