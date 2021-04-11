@@ -16,19 +16,19 @@ inoremap <Leader>t TRUE
 inoremap <Leader>u _
 
 " Split
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-let g:smartsplit_width=80
-function! s:smartsplit() abort
-  if winwidth('.') >= 2 * g:smartsplit_width
-    execute "norm! \<C-W>v\<C-W>l"
-  else
-    execute "norm! \<C-W>s\<C-W>j"
-  endif
-endfunction
-command! SmartSplit :call <SID>smartsplit()
+" nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" let g:smartsplit_width=80
+" function! s:smartsplit() abort
+"   if winwidth('.') >= 2 * g:smartsplit_width
+"     execute "norm! \<C-W>v\<C-W>l"
+"   else
+"     execute "norm! \<C-W>s\<C-W>j"
+"   endif
+" endfunction
+" command! SmartSplit :call <SID>smartsplit()
 
 " Indent
 filetype plugin indent on
@@ -82,9 +82,10 @@ let g:Rout_more_colors = 1
 
 " Plug
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'ervndew/supertab'
+Plug 'ervandew/supertab'
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-Plug 'junegunn/fzf', {'do': {-> fzf#install()}}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'romainl/flattened'
 Plug 'spolu/dwm.vim'
 Plug 'tidalcycles/vim-tidal'

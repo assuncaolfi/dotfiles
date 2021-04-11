@@ -16,5 +16,6 @@ apt-get install -y \
   libuv1-dev \
   libvterm-dev \
   luajit \
-  luarocks
+  luarocks \
+  unzip
 

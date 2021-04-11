@@ -23,3 +23,11 @@ nvim +PlugInstall +qall
 # TODO make this conditional on which R not being null
 # Rscript -e 'install.packages("renv"); renv::install("~/.local/share/nvim/plugged/Nvim-R/R/nvimcom/")'
 
+# fonts
+mkdir hasklig
+cd hasklig
+wget https://github.com/i-tu/Hasklig/releases/download/1.2/Hasklig-1.2.zip
+unzip Hasklig-1.2.zip
+rm Hasklig-1.2.zip
+mv hasklig /usr/share/fonts/opentype/.
+fc-cache -fv
