@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # dependencies
 apt-add-repository -y ppa:git-core/ppa
