@@ -4,6 +4,7 @@
 apt-add-repository -y ppa:git-core/ppa
 apt-get update
 apt-get install -y \
+  a2jmidid \
   build-essential \
   cabal-install \
   git \
@@ -20,6 +21,11 @@ cabal update
 cabal install tidal --lib
 # superdirt
 sclang install-superdirt.sc
+
+# tidalvim
+cd ~/.local/share/nvim/plugged/vim-tidal
+sudo make install
+cd -
 
 # samples 
 git clone \
