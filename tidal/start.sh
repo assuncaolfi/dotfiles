@@ -1,16 +1,12 @@
 #!/bin/bash
 
-gnome-terminal -x jackd -R -d alsa -d hw:1,0 &
-sleep 5
-gnome-terminal -x a2jmidid -e &
-sleep 5
-gnome-terminal -x sclang SuperDirt.sc &
-sleep 5 
-gnome-terminal -x tidalvim
+st -e 'tidalvim' &
+tmux new-session \; \
+  send-keys 'sclang SuperDirt.sc' C-m \; \
+  split-window -v \; \
+  send-keys 'jackd -R -d alsa -d hw:0,0' C-m \; \
+  split-window -h \; \
+  send-keys 'sleep 1; a2jmidid -e' C-m \; 
+#   new-window \; \
+#   send-keys 'tidalvim' C-m \;
 
-# tmux \
-#  new-session 'jackd -R -d alsa -d hw:1,0 ; read' \; \
-#  split-window -d 'a2jmidid -e ; read' \; \
-#  split-window -d "sclang SuperDirt.sc ; read" \; \
-#  split-window -d "tidalvim" \; \
-#  select-layout even-vertical \; 

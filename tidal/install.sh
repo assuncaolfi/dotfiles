@@ -7,8 +7,10 @@ apt-get install -y \
   a2jmidid \
   build-essential \
   cabal-install \
+  jackd2 \
   git \
-  jackd2
+  tmux
+adduser $USER group
 
 # supercollider
 git clone https://github.com/lvm/build-supercollider
@@ -18,13 +20,14 @@ sh build-sc3-plugins.sh
 
 # tidalcycles
 cabal update
-cabal install tidal --lib
+cabal install tidal
 # superdirt
 sclang install-superdirt.sc
 
 # tidalvim
 cd ~/.local/share/nvim/plugged/vim-tidal
-sudo make install
+make
+make install
 cd -
 
 # samples 

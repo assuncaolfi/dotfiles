@@ -2,5 +2,10 @@
 
 apt-get update
 apt-get install -y \
-  libharfbuzz-dev
+  build-essential \
+  libharfbuzz-dev \
+  libx11-dev \
+  libxinerama-dev \
+  sharutils \
+  suckless-tools
 
