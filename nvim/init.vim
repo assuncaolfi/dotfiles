@@ -101,8 +101,8 @@ nnoremap <C-J> <C-W>w
 nnoremap <C-K> <C-W>W
 nnoremap <C-N> :call DWM_New()<CR>                                     
 nnoremap <C-X> :exec DWM_Close()<CR>                                   
-nnoremap <C-T> :call DWM_New()<CR>:term<CR>                                   
-nnoremap <C-@> :call DWM_Focus()<CR>
+nnoremap <C-T> :term<CR>                                   
+nnoremap <C-Space> :call DWM_Focus()<CR>
 nnoremap <C-L> :call DWM_GrowMaster()<CR>
 nnoremap <C-H> :call DWM_ShrinkMaster()<CR>
 "" Nvim-R
@@ -113,6 +113,8 @@ let g:rout_follow_colorscheme = 1
 let r_indent_align_args = 0
 "" supertab
 let g:SuperTabDefaultCompletionType = "context"
+"" vim-slime
+let g:slime_target = "neovim"
 
 " Theme
 syntax enable
