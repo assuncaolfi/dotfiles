@@ -3,7 +3,8 @@
 
 " Maps
 "" Global
-let mapleader = "\\"
+let mapleader = ";"
+let maplocalleader = ";"
 "" Normal
 nnoremap <silent> <C-f> :Files<CR>
 "" Terminal
@@ -20,11 +21,13 @@ inoremap { {}<left>
 """ R syntax 
 inoremap <Leader>a <Space><-<Space>
 inoremap <Leader>f FALSE
-inoremap <Leader>l lapply(
+inoremap <Leader>fu function() {<CR>}
+inoremap <Leader>la lapply()<Esc>i
 inoremap <Leader>n ::
 inoremap <Leader>p <Space>%>%<CR>
+inoremap <Leader>P <Esc>A<Space>%>%<CR>
 inoremap <Leader>t TRUE
-inoremap <Leader>u _
+inoremap <Space><Space> _
 
 " Split
 " nnoremap <C-H> <C-W><C-H>
@@ -92,19 +95,19 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'romainl/flattened'
 Plug 'spolu/dwm.vim'
-Plug 'tidalcycles/vim-tidal'
+" Plug 'tidalcycles/vim-tidal'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 "" dwm.vim
 let g:dwm_map_keys = 0
-nnoremap <C-J> <C-W>w
-nnoremap <C-K> <C-W>W
-nnoremap <C-N> :call DWM_New()<CR>                                     
-nnoremap <C-X> :exec DWM_Close()<CR>                                   
-nnoremap <C-T> :term<CR>                                   
-nnoremap <C-Space> :call DWM_Focus()<CR>
-nnoremap <C-L> :call DWM_GrowMaster()<CR>
-nnoremap <C-H> :call DWM_ShrinkMaster()<CR>
+nmap <C-H> <Plug>DWMShrinkMaster
+nmap <C-J> <C-W>w
+nmap <C-K> <C-W>W
+nmap <C-L> <Plug>DWMGrowMaster
+nmap <C-N> <Plug>DWMNew
+nmap <C-Space> <Plug>DWMFocus
+nmap <C-T> :term<CR>                                   
+nmap <C-X> <Plug>DWMClose
 "" Nvim-R
 autocmd FileType r setlocal sw=2
 let R_assign = 0
