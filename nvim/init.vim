@@ -83,17 +83,11 @@ set mouse=a
 " let g:netrw_liststyle = 1
 " let g:netrw_winsize = 25
 
-" Nvim-R
-autocmd FileType r setlocal sw=2
-let R_assign = 0
-let g:Rout_more_colors = 1
-let g:rout_follow_colorscheme = 1
-let r_indent_align_args = 0
-
 " Plug
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'ervandew/supertab'
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+Plug 'jpalardy/vim-slime'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'romainl/flattened'
@@ -101,9 +95,23 @@ Plug 'spolu/dwm.vim'
 Plug 'tidalcycles/vim-tidal'
 Plug 'tpope/vim-fugitive'
 call plug#end()
-
-" Supertab
-" let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+"" dwm.vim
+let g:dwm_map_keys = 0
+nnoremap <C-J> <C-W>w
+nnoremap <C-K> <C-W>W
+nnoremap <C-N> :call DWM_New()<CR>                                     
+nnoremap <C-X> :exec DWM_Close()<CR>                                   
+nnoremap <C-T> :call DWM_New()<CR>:term<CR>                                   
+nnoremap <C-@> :call DWM_Focus()<CR>
+nnoremap <C-L> :call DWM_GrowMaster()<CR>
+nnoremap <C-H> :call DWM_ShrinkMaster()<CR>
+"" Nvim-R
+autocmd FileType r setlocal sw=2
+let R_assign = 0
+let g:Rout_more_colors = 1
+let g:rout_follow_colorscheme = 1
+let r_indent_align_args = 0
+"" supertab
 let g:SuperTabDefaultCompletionType = "context"
 
 " Theme
