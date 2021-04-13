@@ -61,7 +61,7 @@ set nohlsearch
 set nowrap
 set number
 set relativenumber
-set scrolloff=20
+set scrolloff=25
 set termguicolors
 
 " Macro
@@ -114,7 +114,10 @@ let r_indent_align_args = 0
 "" supertab
 let g:SuperTabDefaultCompletionType = "context"
 "" vim-slime
+let g:slime_no_mappings = 1
 let g:slime_target = "neovim"
+nmap <c-s> <Plug>SlimeParagraphSend
+imap <c-s> <Esc><Plug>SlimeParagraphSend<CR>i
 
 " Theme
 syntax enable
