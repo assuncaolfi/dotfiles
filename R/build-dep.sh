@@ -19,9 +19,9 @@ apt-get install -y \
   libreadline-dev \
   libsodium-dev \
   libssl-dev \
+  libv8-dev \
   libxml2-dev \
   openjdk-8-jdk \
   openjdk-8-jre \
   xorg-dev \
-  zlib1g-dev
-
+  zlib1g-dev 

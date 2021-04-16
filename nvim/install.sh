@@ -19,15 +19,15 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 nvim +PlugInstall +qall
 
 # Nvim-R
-# TODO fix, should not be Rscript
-# TODO make this conditional on which R not being null
-# Rscript -e 'install.packages("renv"); renv::install("~/.local/share/nvim/plugged/Nvim-R/R/nvimcom/")'
+Rscript -e 'install.packages("~/.local/share/nvim/plugged/Nvim-R/R/nvimcom/", repo = NULL, source = TRUE)'
 
 # fonts
-mkdir hasklig
-cd hasklig
-wget https://github.com/i-tu/Hasklig/releases/download/1.2/Hasklig-1.2.zip
-unzip Hasklig-1.2.zip
-rm Hasklig-1.2.zip
-mv hasklig /usr/share/fonts/opentype/.
+mkdir fira-code
+cd fira-code
+wget https://github.com/tonsky/FiraCode/releases/download/5.2/Fira_Code_v5.2.zip
+unzip Fira_Code_v5.2.zip
+rm Fira_Code_v5.2.zip
+sudo mv ttf /usr/share/fonts/opentype/FiraCode
 fc-cache -fv
+cd -
+rm -r -f fira-code

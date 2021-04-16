@@ -26,7 +26,8 @@ echo 'dwmstatus 2>&1 >/dev/null &' >> /etc/X11/xinit/xinitrc
 git clone https://git.suckless.org/st
 cp st-hasklig.diff st/st-hasklig.diff
 cd st
-git apply st-hasklig.diff
+make uninstall
+git apply st-fira-code.diff
 wget https://st.suckless.org/patches/ligatures/0.8.3/st-ligatures-20200430-0.8.3.diff
 git apply st-ligatures-20200430-0.8.3.diff
 make

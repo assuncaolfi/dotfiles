@@ -21,28 +21,15 @@ inoremap { {}<left>
 """ R syntax 
 inoremap <Leader>a <Space><-<Space>
 inoremap <Leader>f FALSE
-inoremap <Leader>fu function() {<CR>}
-inoremap <Leader>la lapply()<Esc>i
+inoremap <Leader>fu function()<left>
+inoremap <Leader>l lapply()<Esc>i
 inoremap <Leader>n ::
 inoremap <Leader>p <Space>%>%<CR>
 inoremap <Leader>P <Esc>A<Space>%>%<CR>
 inoremap <Leader>t TRUE
-inoremap <Space><Space> _
-
-" Split
-" nnoremap <C-H> <C-W><C-H>
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" let g:smartsplit_width=80
-" function! s:smartsplit() abort
-"   if winwidth('.') >= 2 * g:smartsplit_width
-"     execute "norm! \<C-W>v\<C-W>l"
-"   else
-"     execute "norm! \<C-W>s\<C-W>j"
-"   endif
-" endfunction
-" command! SmartSplit :call <SID>smartsplit()
+inoremap <Leader><Space> _
+let @b = "f,a\<Enter>\<Esc>"
+let @s = "80i-\<Esc>80|D"
 
 " Indent
 filetype plugin indent on
@@ -55,7 +42,8 @@ set tabstop=2
 set hidden 
 set noswapfile
 set nobackup
-set updatetime=50
+set nowritebackup
+set updatetime=300 " 50
 
 " Display
 set colorcolumn=80
@@ -67,24 +55,17 @@ set relativenumber
 set scrolloff=25
 set termguicolors
 
-" Macro
-let @b = "f,a\<Enter>\<Esc>"
-let @s = "80i-\<Esc>80|D"
+" Status
+set laststatus=2
+set statusline+=\ %f
+" "set statusline+=%=
+" "set statusline+=\ %l:%c
+set statusline+=%=
+set statusline+=\ %{strftime('%Y-%m-%d')}
+set statusline+=\ %{strftime('%H:%M')}
 
 " Mouse
 set mouse=a
-
-" netrw
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
-" let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-" let g:netrw_altv = 1
-" let g:netrw_banner = 0
-" let g:netrw_browse_split = 4
-" let g:netrw_liststyle = 1
-" let g:netrw_winsize = 25
 
 " Plug
 call plug#begin('~/.local/share/nvim/plugged')
@@ -95,7 +76,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'romainl/flattened'
 Plug 'spolu/dwm.vim'
-" Plug 'tidalcycles/vim-tidal'
+Plug 'tidalcycles/vim-tidal'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 "" dwm.vim
@@ -116,11 +97,25 @@ let g:rout_follow_colorscheme = 1
 let r_indent_align_args = 0
 "" supertab
 let g:SuperTabDefaultCompletionType = "context"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+"" tidal-vim
+let g:tidal_target = "terminal"
 "" vim-slime
 let g:slime_no_mappings = 1
 let g:slime_target = "neovim"
+xmap <c-s> <Plug>SlimeRegionSend
 nmap <c-s> <Plug>SlimeParagraphSend
 imap <c-s> <Esc><Plug>SlimeParagraphSend<CR>i
+" Tidal Cycles
+function TidalCycles()
+  :term jackd -R -d alsa -d hw:0,0
+  :call DWM_New()
+  :term sleep 3 && a2jmidid -e
+  :call DWM_New()
+  :term sclang SuperDirt.sc
+  :tabnew
+  :execute 'write' strftime('%Y-%m-%d') . '.tidal'
+endfunction
 
 " Theme
 syntax enable
