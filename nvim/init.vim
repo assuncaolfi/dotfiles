@@ -1,12 +1,13 @@
 " Variables
 " TODO let width=80
 
+" Edit
+set showmatch
+
 " Maps
 "" Global
-let mapleader = ";"
-let maplocalleader = ";"
-"" Normal
-nnoremap <silent> <C-f> :Files<CR>
+let mapleader = "\\"
+let maplocalleader = "\\"
 "" Terminal
 tnoremap <Esc> <C-\><C-n>
 "" Insert
@@ -21,13 +22,13 @@ inoremap { {}<left>
 """ R syntax 
 inoremap <Leader>a <Space><-<Space>
 inoremap <Leader>f FALSE
-inoremap <Leader>fu function() {<CR>}
-inoremap <Leader>la lapply()<Esc>i
+inoremap <Leader>fu function(
+inoremap <Leader>l lapply(
 inoremap <Leader>n ::
-inoremap <Leader>p <Space>%>%<CR>
-inoremap <Leader>P <Esc>A<Space>%>%<CR>
+inoremap <Leader>p <Esc>A<Space>%>%<CR>
 inoremap <Leader>t TRUE
-inoremap <Space><Space> _
+inoremap - _
+inoremap _ -
 
 " Split
 " nnoremap <C-H> <C-W><C-H>
@@ -74,17 +75,13 @@ let @s = "80i-\<Esc>80|D"
 " Mouse
 set mouse=a
 
-" netrw
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
-" let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-" let g:netrw_altv = 1
-" let g:netrw_banner = 0
-" let g:netrw_browse_split = 4
-" let g:netrw_liststyle = 1
-" let g:netrw_winsize = 25
+" netwr
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+let g:netrw_altv = 1
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_liststyle = 1
+let g:netrw_winsize = 25
 
 " Plug
 call plug#begin('~/.local/share/nvim/plugged')
@@ -108,6 +105,8 @@ nmap <C-N> <Plug>DWMNew
 nmap <C-Space> <Plug>DWMFocus
 nmap <C-T> :term<CR>                                   
 nmap <C-X> <Plug>DWMClose
+"" fzf
+nnoremap <silent> <C-f> :Files<CR>
 "" Nvim-R
 autocmd FileType r setlocal sw=2
 let R_assign = 0
@@ -119,8 +118,8 @@ let g:SuperTabDefaultCompletionType = "context"
 "" vim-slime
 let g:slime_no_mappings = 1
 let g:slime_target = "neovim"
-nmap <c-s> <Plug>SlimeParagraphSend
-imap <c-s> <Esc><Plug>SlimeParagraphSend<CR>i
+xmap <C-S> <Plug>SlimeRegionSend
+nmap <C-P> <Plug>SlimeParagraphSend
 
 " Theme
 syntax enable
