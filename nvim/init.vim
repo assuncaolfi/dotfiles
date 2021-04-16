@@ -3,10 +3,8 @@
 
 " Maps
 "" Global
-let mapleader = ";"
-let maplocalleader = ";"
-"" Normal
-nnoremap <silent> <C-f> :Files<CR>
+let mapleader = "\\"
+let maplocalleader = "\\"
 "" Terminal
 tnoremap <Esc> <C-\><C-n>
 "" Insert
@@ -21,15 +19,15 @@ inoremap { {}<left>
 """ R syntax 
 inoremap <Leader>a <Space><-<Space>
 inoremap <Leader>f FALSE
-inoremap <Leader>fu function()<left>
-inoremap <Leader>l lapply()<Esc>i
+inoremap <Leader>fu function(
+inoremap <Leader>l lapply(
 inoremap <Leader>n ::
-inoremap <Leader>p <Space>%>%<CR>
-inoremap <Leader>P <Esc>A<Space>%>%<CR>
+inoremap <Leader>p <Esc>A<Space>%>%<CR>
 inoremap <Leader>t TRUE
-inoremap <Leader><Space> _
+inoremap <Leader>h <Esc>80i-<Esc>80|D<CR>
+inoremap - _
+inoremap _ -
 let @b = "f,a\<Enter>\<Esc>"
-let @s = "80i-\<Esc>80|D"
 
 " Indent
 filetype plugin indent on
@@ -54,6 +52,7 @@ set number
 set relativenumber
 set scrolloff=25
 set termguicolors
+set showmatch
 
 " Status
 set laststatus=2
@@ -66,6 +65,14 @@ set statusline+=\ %{strftime('%H:%M')}
 
 " Mouse
 set mouse=a
+
+" netwr
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+let g:netrw_altv = 1
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_liststyle = 1
+let g:netrw_winsize = 25
 
 " Plug
 call plug#begin('~/.local/share/nvim/plugged')
@@ -89,6 +96,8 @@ nmap <C-N> <Plug>DWMNew
 nmap <C-Space> <Plug>DWMFocus
 nmap <C-T> :term<CR>                                   
 nmap <C-X> <Plug>DWMClose
+"" fzf
+nnoremap <silent> <C-f> :Files<CR>
 "" Nvim-R
 autocmd FileType r setlocal sw=2
 let R_assign = 0
@@ -103,8 +112,8 @@ let g:tidal_target = "terminal"
 "" vim-slime
 let g:slime_no_mappings = 1
 let g:slime_target = "neovim"
-xmap <c-s> <Plug>SlimeRegionSend
-nmap <c-s> <Plug>SlimeParagraphSend
+xmap <C-S> <Plug>SlimeRegionSend
+nmap <C-P> <Plug>SlimeParagraphSend
 imap <c-s> <Esc><Plug>SlimeParagraphSend<CR>i
 " Tidal Cycles
 function TidalCycles()
