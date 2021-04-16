@@ -17,15 +17,15 @@ inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
 """ R syntax 
+inoremap - _
 inoremap <Leader>a <Space><-<Space>
 inoremap <Leader>f FALSE
 inoremap <Leader>fu function(
+inoremap <Leader>h <Esc>80i-<Esc>80\|D<CR>
 inoremap <Leader>l lapply(
 inoremap <Leader>n ::
 inoremap <Leader>p <Esc>A<Space>%>%<CR>
 inoremap <Leader>t TRUE
-inoremap <Leader>h <Esc>80i-<Esc>80|D<CR>
-inoremap - _
 inoremap _ -
 let @b = "f,a\<Enter>\<Esc>"
 

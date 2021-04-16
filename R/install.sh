@@ -12,4 +12,5 @@ sudo make install
 cd ..
 rm -r -f R-${VERSION}
 sudo ln -s /opt/R/${VERSION}/bin/R /bin/R
-# Rscript -e "install.packages('lintr')"
+Rscript -e "install.packages('Cairo')"
+cp .Rprofile $HOME/.Rprofile

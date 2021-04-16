@@ -12,6 +12,7 @@ apt-get install -y \
   gobjc++ \
   libblas-dev \
   libbz2-dev \
+  libcairo2-dev \
   libcurl4 \
   libcurl4-openssl-dev \
   liblzma-dev \
@@ -21,7 +22,9 @@ apt-get install -y \
   libssl-dev \
   libv8-dev \
   libxml2-dev \
+  libxt-dev \
   openjdk-8-jdk \
   openjdk-8-jre \
   xorg-dev \
   zlib1g-dev 
+
