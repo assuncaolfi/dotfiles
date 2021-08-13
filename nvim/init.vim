@@ -1,32 +1,21 @@
-" Variables
-" TODO let width=80
-
 " Maps
 "" Global
 let mapleader = "\\"
 let maplocalleader = "\\"
 "" Terminal
 tnoremap <Esc> <C-\><C-n>
+"" Normal
+nnoremap <C-s> :w<CR>
+nnoremap <Leader>h :g/# [A-Z][a-z]* --*<CR><CR>
+nnoremap <Leader>R \rf<Space><Space>
 "" Insert
 """ Normal mode
 inoremap <C-c> <Esc>
-""" Auto-close quotes and other matched characters
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
+inoremap <C-s> <Esc>:w<CR>
 """ R syntax 
-inoremap - _
 inoremap <Leader>a <Space><-<Space>
-inoremap <Leader>f FALSE
-inoremap <Leader>fu function(
 inoremap <Leader>h <Esc>80i-<Esc>80\|D<CR>
-inoremap <Leader>l lapply(
-inoremap <Leader>n ::
-inoremap <Leader>p <Esc>A<Space>%>%<CR>
-inoremap <Leader>t TRUE
-inoremap _ -
+inoremap <Leader>p <Esc>A<Space>\|><CR>
 let @b = "f,a\<Enter>\<Esc>"
 
 " Indent
@@ -59,9 +48,9 @@ set laststatus=2
 set statusline+=\ %f
 " "set statusline+=%=
 " "set statusline+=\ %l:%c
-set statusline+=%=
-set statusline+=\ %{strftime('%Y-%m-%d')}
-set statusline+=\ %{strftime('%H:%M')}
+" "set statusline+=%=
+" "set statusline+=\ %{strftime('%Y-%m-%d')}
+" "set statusline+=\ %{strftime('%H:%M')}
 
 " Mouse
 set mouse=a
@@ -112,18 +101,18 @@ let g:tidal_target = "terminal"
 "" vim-slime
 let g:slime_no_mappings = 1
 let g:slime_target = "neovim"
-xmap <C-S> <Plug>SlimeRegionSend
+""" xmap <C-S> <Plug>SlimeRegionSend
 nmap <C-P> <Plug>SlimeParagraphSend
-imap <c-s> <Esc><Plug>SlimeParagraphSend<CR>i
+""" imap <c-s> <Esc><Plug>SlimeParagraphSend<CR>i
 " Tidal Cycles
 function TidalCycles()
-  :term jackd -R -d alsa -d hw:0,0
+  :term jackd -R -d alsa -d hw:1,0 "" hw:0,0
   :call DWM_New()
   :term sleep 3 && a2jmidid -e
   :call DWM_New()
   :term sclang SuperDirt.sc
   :tabnew
-  :execute 'write' strftime('%Y-%m-%d') . '.tidal'
+  "" :execute 'write' 'scripts/' . strftime('%Y-%m-%d') . '.tidal'
 endfunction
 
 " Theme
