@@ -7,7 +7,6 @@ tnoremap <Esc> <C-\><C-n>
 "" Normal
 nnoremap <C-s> :w<CR>
 nnoremap <Leader>h :g/# [A-Z][a-z]* --*<CR><CR>
-nnoremap <Leader>R \rf<Space><Space>
 "" Insert
 """ Normal mode
 inoremap <C-c> <Esc>
@@ -93,6 +92,14 @@ let R_assign = 0
 let g:Rout_more_colors = 1
 let g:rout_follow_colorscheme = 1
 let r_indent_align_args = 0
+let R_auto_start = 2
+" let R_rconsole_width = 40
+let R_min_editor_width = 0
+" let R_min_editor_width = 80 
+" let R_rconsole_width = winwidth(0) / 2
+" autocmd VimResized * let R_rconsole_width = winwidth(0) / 2
+let R_rconsole_width = winwidth(0) - 85 
+autocmd VimResized * let R_rconsole_width = winwidth(0) - 85 
 "" supertab
 let g:SuperTabDefaultCompletionType = "context"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
