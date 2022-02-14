@@ -6,16 +6,14 @@ let maplocalleader = "\\"
 tnoremap <Esc> <C-\><C-n>
 "" Normal
 nnoremap <C-s> :w<CR>
-nnoremap <Leader>h :g/# [A-Z][a-z]* --*<CR><CR>
 "" Insert
-""" Normal mode
+""" Normal
 inoremap <C-c> <Esc>
 inoremap <C-s> <Esc>:w<CR>
-""" R syntax 
+""" R
 inoremap <Leader>a <Space><-<Space>
 inoremap <Leader>h <Esc>80i-<Esc>80\|D<CR>
 inoremap <Leader>p <Esc>A<Space>\|><CR>
-let @b = "f,a\<Enter>\<Esc>"
 
 " Indent
 filetype plugin indent on
@@ -26,10 +24,10 @@ set tabstop=2
 
 " Buffer and History
 set hidden 
-set noswapfile
 set nobackup
+set noswapfile
 set nowritebackup
-set updatetime=300 " 50
+set updatetime=300
 
 " Display
 set colorcolumn=80
@@ -39,28 +37,15 @@ set nowrap
 set number
 set relativenumber
 set scrolloff=25
-set termguicolors
 set showmatch
+set termguicolors
 
 " Status
 set laststatus=2
 set statusline+=\ %f
-" "set statusline+=%=
-" "set statusline+=\ %l:%c
-" "set statusline+=%=
-" "set statusline+=\ %{strftime('%Y-%m-%d')}
-" "set statusline+=\ %{strftime('%H:%M')}
 
 " Mouse
 set mouse=a
-
-" netwr
-let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
-let g:netrw_altv = 1
-let g:netrw_banner = 0
-let g:netrw_browse_split = 4
-let g:netrw_liststyle = 1
-let g:netrw_winsize = 25
 
 " Plug
 call plug#begin('~/.local/share/nvim/plugged')
@@ -71,8 +56,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'romainl/flattened'
 Plug 'spolu/dwm.vim'
-Plug 'tidalcycles/vim-tidal'
-Plug 'tpope/vim-fugitive'
 call plug#end()
 "" dwm.vim
 let g:dwm_map_keys = 0
@@ -86,18 +69,14 @@ nmap <C-T> :term<CR>
 nmap <C-X> <Plug>DWMClose
 "" fzf
 nnoremap <silent> <C-f> :Files<CR>
-"" Nvim-R
+"" nvim-r
 autocmd FileType r setlocal sw=2
 let R_assign = 0
 let g:Rout_more_colors = 1
 let g:rout_follow_colorscheme = 1
 let r_indent_align_args = 0
 let R_auto_start = 2
-" let R_rconsole_width = 40
 let R_min_editor_width = 0
-" let R_min_editor_width = 80 
-" let R_rconsole_width = winwidth(0) / 2
-" autocmd VimResized * let R_rconsole_width = winwidth(0) / 2
 let R_rconsole_width = winwidth(0) - 85 
 autocmd VimResized * let R_rconsole_width = winwidth(0) - 85 
 "" supertab
@@ -110,17 +89,6 @@ let g:slime_no_mappings = 1
 let g:slime_target = "neovim"
 """ xmap <C-S> <Plug>SlimeRegionSend
 nmap <C-P> <Plug>SlimeParagraphSend
-""" imap <c-s> <Esc><Plug>SlimeParagraphSend<CR>i
-" Tidal Cycles
-function TidalCycles()
-  :term jackd -R -d alsa -d hw:1,0 "" hw:0,0
-  :call DWM_New()
-  :term sleep 3 && a2jmidid -e
-  :call DWM_New()
-  :term sclang SuperDirt.sc
-  :tabnew
-  "" :execute 'write' 'scripts/' . strftime('%Y-%m-%d') . '.tidal'
-endfunction
 
 " Theme
 syntax enable
