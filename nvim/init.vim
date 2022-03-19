@@ -1,6 +1,5 @@
 " Maps
 "" Global
-let mapleader = "\\"
 let maplocalleader = "\\"
 "" Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -49,12 +48,10 @@ set mouse=a
 
 " Plug
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'ervandew/supertab'
+Plug 'arcticicestudio/nord-vim'
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-Plug 'jpalardy/vim-slime'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'romainl/flattened'
 Plug 'spolu/dwm.vim'
 call plug#end()
 "" dwm.vim
@@ -79,26 +76,16 @@ let R_auto_start = 2
 let R_min_editor_width = 0
 let R_rconsole_width = winwidth(0) - 85 
 autocmd VimResized * let R_rconsole_width = winwidth(0) - 85 
-"" supertab
-let g:SuperTabDefaultCompletionType = "context"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-"" tidal-vim
-let g:tidal_target = "terminal"
-"" vim-slime
-let g:slime_no_mappings = 1
-let g:slime_target = "neovim"
-""" xmap <C-S> <Plug>SlimeRegionSend
-nmap <C-P> <Plug>SlimeParagraphSend
 
 " Theme
 syntax enable
 let hr = (strftime('%H'))
 if hr >= 18
-  colorscheme flattened_dark 
+  colorscheme nord 
 elseif hr >= 6
-  colorscheme flattened_light 
+  colorscheme nord 
 elseif hr >= 0
-  colorscheme flattened_dark 
+  colorscheme nord 
 endif
 set cursorline
 augroup cursorline
