@@ -1,18 +1,17 @@
 " Maps
 "" Global
+let mapleader = ","
 let maplocalleader = "\\"
 "" Terminal
 tnoremap <Esc> <C-\><C-n>
 "" Normal
-nnoremap <C-s> :w<CR>
+nnoremap <leader>s :w<CR>
+nnoremap <leader>t :term<CR>                                   
 "" Insert
-""" Normal
-inoremap <C-c> <Esc>
-inoremap <C-s> <Esc>:w<CR>
+inoremap <C-i> <Esc>
 """ R
-inoremap <Leader>a <Space><-<Space>
-inoremap <Leader>h <Esc>80i-<Esc>80\|D<CR>
-inoremap <Leader>p <Esc>A<Space>\|><CR>
+inoremap <localleader>a <Space><-<Space>
+inoremap <localleader>p <Esc>A<Space>\|><CR><Space><Space>
 
 " Indent
 filetype plugin indent on
@@ -60,12 +59,11 @@ nmap <C-H> <Plug>DWMShrinkMaster
 nmap <C-J> <C-W>w
 nmap <C-K> <C-W>W
 nmap <C-L> <Plug>DWMGrowMaster
-nmap <C-N> <Plug>DWMNew
-nmap <C-Space> <Plug>DWMFocus
-nmap <C-T> :term<CR>                                   
-nmap <C-X> <Plug>DWMClose
+nmap <localleader><Space> <Plug>DWMFocus
+nmap <leader>c <Plug>DWMClose
+nmap <leader>n <Plug>DWMNew
 "" fzf
-nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <leader>f :Files<CR>
 "" nvim-r
 autocmd FileType r setlocal sw=2
 let R_assign = 0
