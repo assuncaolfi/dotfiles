@@ -1,7 +1,8 @@
+autocmd VimEnter * Limelight
+
 " Source ---------------------------------------------------------------------
 
 " source ~/.config/nvim/coc.vim
-luafile treesitter.lua
 
 " Map ------------------------------------------------------------------------
 
@@ -13,7 +14,7 @@ let maplocalleader = ";"
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>q :xa<CR>
 nnoremap <leader>s :w<CR>
-nnoremap <leader>t :term//bash<CR>                                   
+nnoremap <leader>t :term//zsh<CR>
 
 " Terminal
 tnoremap <Esc> <C-\><C-n>
@@ -65,7 +66,7 @@ set incsearch
 " Completion recognizes capitalization
 set infercase
 " Always show the status bar
-set laststatus=2
+set laststatus=3
 " Break long lines by word, not char
 set linebreak
 " Show whitespace as special chars - see listchars
@@ -155,17 +156,18 @@ set autowriteall
 
 " call
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}, { 'for': ['r', 'rmd', 'rnoweb']}
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable', 'for': ['r', 'rmd', 'rnoweb']}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'junegunn/vim-emoji' 
+Plug 'junegunn/vim-emoji'
 Plug 'mllg/vim-devtools-plugin', { 'for': ['r', 'rmd', 'rnoweb']}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'romainl/flattened'
 call plug#end()
+luafile ~/.config/nvim/treesitter.lua
 
 " R --------------------------------------------------------------------------
 
@@ -247,6 +249,7 @@ set fillchars+=vert:\
 
 " Theme ----------------------------------------------------------------------
 
+" Enable highlighting
 syntax enable
 let hr = (strftime('%H'))
 if hr >= 18
@@ -263,3 +266,6 @@ augroup cursorline
   au ColorScheme * hi clear CursorLine
                \ | hi link CursorLine CursorColumn
 augroup END
+" Thin split separators
+highlight WinSeparator guibg=None
+
