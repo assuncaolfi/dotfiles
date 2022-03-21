@@ -1,7 +1,0 @@
-#!/bin/bash
-
-/bin/bash -c \
-  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-defaults write -g InitialKeyRepeat -int 10
-defaults write -g KeyRepeat -int 1
-reboot

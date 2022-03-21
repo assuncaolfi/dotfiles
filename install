@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# brew
+/bin/bash -c \
+  "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install \
+  neovim \
+  python3
+brew tap homebrew/cask-fonts
+brew install --cask \
+  iterm2 \
+  font-fira-code \
+  r
+
+# pip
+pip3 install -U \
+  radian \
+  pygments \
+  pygments-solarized
+
+# neovim
+mkdir ~/.config/nvim
+cp nvim ~/.config
+nvim +PlugInstall +qall
+
+# radian 
+mkdir ~/.config/radian
+cp -r radian ~/.config
+
+# config
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -int 1
+
+# end
+reboot
