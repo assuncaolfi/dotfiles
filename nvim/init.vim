@@ -65,7 +65,7 @@ set inccommand=nosplit
 set incsearch
 " Completion recognizes capitalization
 set infercase
-" Always show the status bar
+" Global status bar
 set laststatus=3
 " Break long lines by word, not char
 set linebreak
@@ -100,7 +100,7 @@ set sessionoptions-=options
 " Shift to certain columns, not just n spaces
 set shiftround
 " Number of spaces to shift for autoindent or >,<
-set shiftwidth=4
+set shiftwidth=2
 " Hide Omnicomplete messages
 set shortmess+=c
 " Show for lines that have been wrapped, like Emacs
@@ -114,11 +114,11 @@ set sidescrolloff=3
 " Lets you search for ALL CAPS
 set smartcase
 " Spaces 'feel' like tabs
-set softtabstop=4
+set softtabstop=2
 " Ignore these files when tab-completing
 set suffixes+=.pyc
 " The One True Tab
-set tabstop=4
+set tabstop=2
 " Don't set the title of the Vim window
 set notitle
 " Disable conceal
@@ -161,11 +161,13 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'mllg/vim-devtools-plugin', { 'for': ['r', 'rmd', 'rnoweb']}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'romainl/flattened'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 luafile ~/.config/nvim/treesitter.lua
 
@@ -207,7 +209,7 @@ function! s:fillLine( str )
     .s/[[:space:]]*$//
     " calculate total number of 'str's to insert
     let reps = (tw - col("$")) / len(a:str)
-    " insert them, if there's room, removing trailing spaces 
+    " insert them, if there's room, removing trailing spaces
     " (though forcing there to be one)
     if reps > 0
         .s/$/\=(' '.repeat(a:str, reps))/
@@ -245,21 +247,23 @@ noremap <silent> <C-Up> :resize +2<CR>
 noremap <silent> <C-Down> :resize -2<CR>
 
 " Removes pipes | that act as seperators on splits
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 
 " Theme ----------------------------------------------------------------------
 
 " Enable highlighting
+set termguicolors
 syntax enable
+colorscheme seoul256
+let g:airline_theme='seoul256'
 let hr = (strftime('%H'))
 if hr >= 18
-  colorscheme flattened_dark
+  set background=dark
 elseif hr >= 6
-  colorscheme flattened_light
+  set background=light
 elseif hr >= 0
-  colorscheme flattened_dark
+  set background=dark
 endif
-set termguicolors
 set cursorline
 augroup cursorline
   au!
