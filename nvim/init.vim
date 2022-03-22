@@ -156,19 +156,22 @@ set autowriteall
 
 " call
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'airblade/vim-rooter'
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable', 'for': ['r', 'rmd', 'rnoweb']}
+Plug 'jnurmine/Zenburn'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-emoji'
 Plug 'mllg/vim-devtools-plugin', { 'for': ['r', 'rmd', 'rnoweb']}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
+let g:rooter_patterns = ['.git']
 luafile ~/.config/nvim/treesitter.lua
 
 " R --------------------------------------------------------------------------
@@ -254,8 +257,8 @@ set fillchars+=vert:\
 " Enable highlighting
 set termguicolors
 syntax enable
-colorscheme seoul256
-let g:airline_theme='seoul256'
+colorscheme zenburn
+let g:airline_theme='zenburn'
 let hr = (strftime('%H'))
 if hr >= 18
   set background=dark

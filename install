@@ -29,8 +29,6 @@ nvim +PlugInstall +qall
 # radian
 mkdir ~/.config/radian
 cp -r radian ~/.config
-python3 radian/vimpyg.py radian/seoul256.vim > seoul256.py
-mv seoul256.py /usr/local/Cellar/python@3.9/3.9.10/Frameworks/Python.framework/Versions/3.9/lib/python3.9/site-packages/pygments/styles/seoul256.py
 
 # config
 defaults write -g InitialKeyRepeat -int 10

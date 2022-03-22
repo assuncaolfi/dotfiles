@@ -1,2 +1,4 @@
-options(radian.color_scheme = "seoul256")
-options(radian.editing_mode = "vi")
+options(
+  radian.color_scheme = "zenburn",
+  radian.editing_mode = "vi"
+)
