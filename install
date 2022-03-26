@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/zsh
 
 # brew
 /bin/bash -c \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install \
   neovim-nightly \
+  pandoc \
   python3
 brew tap \
   homebrew/cask-fonts \
@@ -21,16 +22,12 @@ pip3 install -U \
   pygments \
   pygments-solarized
 
-# neovim
-mkdir ~/.config/nvim
-cp nvim ~/.config
+# configs
+cp -r .config ~/.config
+cp .zshrc ~/.zshrc
 nvim +PlugInstall +qall
 
-# radian
-mkdir ~/.config/radian
-cp -r radian ~/.config
-
-# config
+# defaults
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 

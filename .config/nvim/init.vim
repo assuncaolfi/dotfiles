@@ -1,8 +1,21 @@
-autocmd VimEnter * Limelight
+" Function --------------------------------------------------------------------
 
-" Source ---------------------------------------------------------------------
+function ShowSpaces(...)
+  let @/='\v(\s+$)|( +\ze\t)'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
 
-" source ~/.config/nvim/coc.vim
+function TrimSpaces() range
+  let oldhlsearch=ShowSpaces(1)
+  execute a:firstline.",".a:lastline."substitute ///gec"
+  let &hlsearch=oldhlsearch
+endfunction
 
 " Map ------------------------------------------------------------------------
 
@@ -12,12 +25,19 @@ let maplocalleader = ";"
 
 " Normal
 nnoremap <leader>f :Files<CR>
-nnoremap <leader>q :xa<CR>
-nnoremap <leader>s :w<CR>
-nnoremap <leader>t :term//zsh<CR>
+nnoremap <leader>q ZZ
+nnoremap <leader>t :split<CR>:term<CR>:resize 10<CR>
+nnoremap <leader>w :w<CR>
+
+" Insert
+inoremap jj <Esc>
+autocmd InsertLeave * write
 
 " Terminal
-tnoremap <Esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
+autocmd TermOpen * setlocal nonumber norelativenumber
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
 " Option ---------------------------------------------------------------------
 
@@ -48,7 +68,7 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\ ,fold:-,diff:┄
 " Use braces by default
 set foldmethod=marker
 " 120 is the new 80
-set textwidth=120
+set textwidth=80
 " Format text
 set formatoptions=tcqn1
 " Show wrap line
@@ -92,7 +112,7 @@ set noshowcmd
 " Number of lines to scroll with ^U/^D
 set scroll=4
 " Keep cursor away from this many chars top/bot
-set scrolloff=15
+set scrolloff=999
 " Enable mouse support
 set mouse=a
 " Don't save runtimepath in Vim session (see tpope/vim-pathogen docs)
@@ -151,13 +171,17 @@ set nomodeline
 set updatetime=1000
 " Autosave
 set autowriteall
+" No swap
+set noswapfile
 
 " Plugin ---------------------------------------------------------------------
 
 " call
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-rooter'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable', 'for': ['r', 'rmd', 'rnoweb']}
+Plug 'jpalardy/vim-slime'
 Plug 'jnurmine/Zenburn'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -171,19 +195,26 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
+
+" Plugin config --------------------------------------------------------------
+
+autocmd VimEnter * Limelight
+" autocmd TermOpen * Limelight!
 let g:rooter_patterns = ['.git']
 luafile ~/.config/nvim/treesitter.lua
+source ~/.config/nvim/coc.vim
+let g:slime_target = "neovim"
 
 " R --------------------------------------------------------------------------
 
 " Nvim-R
 let R_assign = 0
 let R_hi_fun = 0
-let R_min_editor_height = 10
+let R_min_editor_height = 80
 let r_indent_align_args = 0
 let R_assign_map = "–"
 let R_non_r_compl = 0
-" let R_rconsole_width = 60
+let R_rconsole_height = 10
 let R_min_editor_width = 80
 let r_indent_align_args = 0
 let rrst_syn_hl_chunk = 1
@@ -206,7 +237,7 @@ let R_set_omnifunc = ["rnoweb", "rhelp", "rrst"]
 " RStudio like sections
 function! s:fillLine( str )
     " set tw to the desired total length
-    let tw = &textwidth - 40
+    let tw = 80 " &textwidth - 40
     if tw==0 | let tw = 80 | endif
     " strip trailing spaces first
     .s/[[:space:]]*$//
@@ -222,9 +253,10 @@ endfunction
 " Setup
 augroup r_setup
     autocmd!
+    " Fix assignment operator
+    autocmd FileType r,rmd inoremap <buffer> <localleader>a <Esc><cmd>normal! a <- <CR>a
     " Fix pipe operator
-    autocmd FileType r,rmd inoremap <buffer> <leader>m <Esc><cmd>normal! a %>%<CR>a
-    autocmd FileType r,rmd inoremap <buffer> >> <Esc><cmd>normal! a \|><CR>a
+    autocmd FileType r,rmd inoremap <buffer> <localleader>m <Esc><cmd>normal! A \|><CR>a
     " Sections like RStudio
     autocmd FileType r inoremap <buffer> ## <esc><cmd>call <SID>fillLine( '-' )<CR>o<C-U><CR>
     autocmd FileType r inoremap <buffer> *** <esc><cmd>call <SID>fillLine( '*' )<CR>o<C-U>
@@ -232,8 +264,16 @@ augroup r_setup
     autocmd FileType r setlocal formatoptions-=t formatoptions+=croql
     " Use Pandoc bib completion for knitr chunk options
     autocmd FileType rmd set completefunc=pandoc#completion#Complete
-    " autocmd FileType r setlocal sw=2
+    " Set custom shiftwidth for R
+    autocmd FileType r,rmd setlocal sw=2
+    " Turn off diagnostic
+    autocmd FileType r,rmd call CocAction('diagnosticToggle')
 augroup END
+
+command! RLoad execute printf(":RSend devtools::load_all()")
+command! RMake execute printf(":RSend devtools::document(); devtools::build()")
+command! RReload execute printf(":RSend detach('package:%s', unload = TRUE); library(%s)", fnamemodify(getcwd(), ':t'), fnamemodify(getcwd(), ':t'))
+command! RmdRender execute printf(":RSend rmarkdown::render('%s')", @%)
 
 " Split ----------------------------------------------------------------------
 
@@ -250,7 +290,7 @@ noremap <silent> <C-Up> :resize +2<CR>
 noremap <silent> <C-Down> :resize -2<CR>
 
 " Removes pipes | that act as seperators on splits
-set fillchars+=vert:\
+" set fillchars+=vert:\
 
 " Theme ----------------------------------------------------------------------
 
@@ -275,4 +315,3 @@ augroup cursorline
 augroup END
 " Thin split separators
 highlight WinSeparator guibg=None
-
