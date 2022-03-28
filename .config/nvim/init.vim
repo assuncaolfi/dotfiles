@@ -179,6 +179,7 @@ set noswapfile
 " call
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-rooter'
+Plug 'arcticicestudio/nord-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable', 'for': ['r', 'rmd', 'rnoweb']}
 Plug 'jpalardy/vim-slime'
@@ -297,13 +298,13 @@ noremap <silent> <C-Down> :resize -2<CR>
 " Enable highlighting
 set termguicolors
 syntax enable
-colorscheme zenburn
-let g:airline_theme='zenburn'
+colorscheme nord
+" let g:airline_theme='nord'
 let hr = (strftime('%H'))
 if hr >= 18
   set background=dark
 elseif hr >= 6
-  set background=light
+  set background=dark
 elseif hr >= 0
   set background=dark
 endif

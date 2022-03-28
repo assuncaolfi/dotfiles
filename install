@@ -16,12 +16,6 @@ brew install --cask \
   qutebrowser \
   r
 
-# pip
-pip3 install -U \
-  radian \
-  pygments \
-  pygments-solarized
-
 # configs
 cp -r .config ~/.config
 cp .zshrc ~/.zshrc
@@ -31,5 +25,9 @@ nvim +PlugInstall +qall
 defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
-# end
+# pip
+pip3 install -U \
+  nord-pygments \
+  radian
+
 reboot
