@@ -120,7 +120,7 @@ set sessionoptions-=options
 " Shift to certain columns, not just n spaces
 set shiftround
 " Number of spaces to shift for autoindent or >,<
-set shiftwidth=2
+set shiftwidth=4
 " Hide Omnicomplete messages
 set shortmess+=c
 " Show for lines that have been wrapped, like Emacs
@@ -134,11 +134,11 @@ set sidescrolloff=3
 " Lets you search for ALL CAPS
 set smartcase
 " Spaces 'feel' like tabs
-set softtabstop=2
+set softtabstop=4
 " Ignore these files when tab-completing
 set suffixes+=.pyc
 " The One True Tab
-set tabstop=2
+set tabstop=4
 " Don't set the title of the Vim window
 set notitle
 " Disable conceal
@@ -178,6 +178,7 @@ set noswapfile
 
 " call
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'JuliaEditorSupport/julia-vim'
 Plug 'airblade/vim-rooter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -199,12 +200,24 @@ call plug#end()
 
 " Plugin config --------------------------------------------------------------
 
-autocmd VimEnter * Limelight
-" autocmd TermOpen * Limelight!
+autocmd VimEnter * Limelight " autocmd TermOpen * Limelight!
+" root projects based on .git folder
 let g:rooter_patterns = ['.git']
+" config treesitter 
 luafile ~/.config/nvim/treesitter.lua
+" config coc
 source ~/.config/nvim/coc.vim
+" slime send to neovim term
 let g:slime_target = "neovim"
+" fzf list hidden files
+let $FZF_DEFAULT_COMMAND = "find . -type f -not -path '*/\.git/*'"
+" set Goyo to 100% height
+let g:goyo_height = 100
+
+" Julia ------------------------------------------------------------------------
+
+command Julia split | resize 10 | term julia
+let g:latex_to_unicode_auto = 1
 
 " R --------------------------------------------------------------------------
 
@@ -215,7 +228,7 @@ let R_min_editor_height = 80
 let r_indent_align_args = 0
 let R_assign_map = "–"
 let R_non_r_compl = 0
-let R_rconsole_height = 10
+let R_rconsole_height = 7
 let R_min_editor_width = 80
 let r_indent_align_args = 0
 let rrst_syn_hl_chunk = 1
