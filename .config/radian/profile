@@ -1,5 +1,0 @@
-options(
-  radian.color_scheme = "nord",
-  radian.complete_while_typing = FALSE,
-  radian.editing_mode = "vi"
-)

@@ -1,5 +1,1 @@
-if [ $ITERM_SESSION_ID ]; then
-precmd() {
-  echo -ne "\033]0;${PWD##*/}\007"
-}
-fi
+/Users/luis.assuncao/.zshrc

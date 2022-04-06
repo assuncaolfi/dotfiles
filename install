@@ -4,22 +4,24 @@
 /bin/bash -c \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install \
-  neovim-nightly \
-  pandoc \
-  python3
+    fd \
+    neovim-nightly \
+    pandoc \
+    python3
 brew tap \
-  homebrew/cask-fonts \
-  jason0x43/homebrew-neovim-nightly
+    homebrew/cask-fonts \
+    jason0x43/homebrew-neovim-nightly
 brew install --cask \
-  iterm2 \
-  font-fira-code \
-  qutebrowser \
-  r
+    iterm2 \
+    font-fira-code \
+    julia \
+    qutebrowser \
+    r
 
 # configs
-cp -r .config ~/.config
-cp .zshrc ~/.zshrc
-nvim +PlugInstall +qall
+ln -s ~/.zshrc .zshrc
+ln -s ~/.config .config
+nvim +CocInstall coc-julia coc-r +PlugInstall +qall
 
 # defaults
 defaults write -g InitialKeyRepeat -int 10
