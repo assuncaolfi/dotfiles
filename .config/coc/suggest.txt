@@ -1,3 +1,7 @@
+end|endfunction|around
+Slime|SlimeOverrideConfig|around
+10|100|around
+split|split|around
 zs|zshrc|around
 JuliaWe|JuliaWeave|around
 Julia|JuliaActivate|around

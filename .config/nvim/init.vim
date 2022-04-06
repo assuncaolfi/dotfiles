@@ -213,8 +213,16 @@ let g:goyo_height = 100
 
 " Julia ------------------------------------------------------------------------
 
-" Split REPL
-command Julia split | resize 10 | term julia
+" Split and Slime REPL
+function! Julia()
+    split
+    resize 10
+    terminal julia
+    $
+    call SlimeOverrideConfig()
+endfunction
+command! Julia call Julia()
+
 " Auto replace LaTeX
 let g:latex_to_unicode_auto = 1
 let g:latex_to_unicode_tab = "off"
@@ -234,23 +242,29 @@ command! JuliaWeave call JuliaWeave()
 
 " Slime ------------------------------------------------------------------------
 
+" Set job to current terminal
+function SlimeOverrideConfig()
+  let l:job_id = trim(execute(":echo b:terminal_job_id"))
+  wincmd p
+  let b:slime_config = {}
+  let b:slime_config["jobid"] = job_id
+endfunction
+
 " Delimit cells
 let g:slime_cell_delimiter = "```"
-" Set defaults
-let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+" Don't ask default
+let g:slime_dont_ask_default = 1
 " Target neovim
 let g:slime_target = "neovim"
 " Remove default mappings
 let g:slime_no_mappings = 1
 " Map sends
 nmap <leader>c <Plug>SlimeSendCell
-nmap <leader>j <Plug>SlimeConfig<Enter>&channel<Enter>
 nmap <leader>l <Plug>SlimeLineSend
 nmap <leader>p <Plug>SlimeParagraphSend
 xmap <leader>s <Plug>SlimeRegionSend
-" nmap <leader>v <Plug>SlimeConfig
 " Map syntax
-imap <buffer> <localleader>p <Esc>A\|>
+" imap <buffer> <localleader>p <Esc>A\|>
 
 " R --------------------------------------------------------------------------
 
