@@ -19,9 +19,11 @@ brew install --cask \
     r
 
 # configs
-ln -s ~/.zshrc .zshrc
-ln -s ~/.config .config
-nvim +CocInstall coc-julia coc-r +PlugInstall +qall
+# mkdir ~/.config
+ln -s $PWD/.zshrc ~/.zshrc
+ln -s $PWD/.config ~/.config
+nvim  +PlugInstall +qall
+nvim +CocInstall coc-julia coc-r +qall
 
 # defaults
 defaults write -g InitialKeyRepeat -int 10

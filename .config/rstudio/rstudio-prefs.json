@@ -1,0 +1,52 @@
+{
+    "initial_working_directory": "~",
+    "editor_theme": "Solarized Dark",
+    "posix_terminal_shell": "bash",
+    "insert_native_pipe_operator": true,
+    "continue_comments_on_newline": true,
+    "highlight_selected_line": true,
+    "highlight_r_function_calls": true,
+    "auto_append_newline": true,
+    "strip_trailing_whitespace": true,
+    "auto_save_on_blur": true,
+    "tab_multiline_completion": true,
+    "editor_keybindings": "vim",
+    "syntax_color_console": true,
+    "soft_wrap_rmd_files": false,
+    "rmd_chunk_output_inline": false,
+    "quarto_enabled": "enabled",
+    "default_project_location": "~",
+    "save_workspace": "never",
+    "load_workspace": false,
+    "panes": {
+        "quadrants": [
+            "Source",
+            "TabSet1",
+            "Console",
+            "TabSet2"
+        ],
+        "tabSet1": [
+            "Environment",
+            "History",
+            "Connections",
+            "Build",
+            "VCS",
+            "Tutorial",
+            "Presentation"
+        ],
+        "tabSet2": [
+            "Files",
+            "Plots",
+            "Packages",
+            "Help",
+            "Viewer",
+            "Presentations"
+        ],
+        "hiddenTabSet": [],
+        "console_left_on_top": false,
+        "console_right_on_top": true,
+        "additional_source_columns": 0
+    },
+    "source_with_echo": true,
+    "jobs_tab_visibility": "shown"
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "coc-julia": ">=0.12.1",
+    "coc-r-lsp": ">=1.2.1"
+  }
+}
