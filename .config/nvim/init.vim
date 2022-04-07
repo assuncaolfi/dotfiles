@@ -20,6 +20,16 @@ autocmd InsertLeave * write
 
 " Terminal ---------------------------------------------------------------------
 
+" Split and Slime REPL
+function! Terminal()
+    split
+    resize 10
+    terminal 
+    $
+    call SlimeOverrideConfig()
+endfunction
+command! Terminal call Terminal()
+
 " Stop insert mode when leaving
 autocmd BufLeave term://* stopinsert
 " Always start in insert mode
@@ -211,6 +221,10 @@ let $FZF_DEFAULT_OPTS='--height 100% --layout=reverse --border'
 " set Goyo to 100% height
 let g:goyo_height = 100
 
+" Python -----------------------------------------------------------------------
+
+let g:slime_python_ipython = 1
+
 " Julia ------------------------------------------------------------------------
 
 " Split and Slime REPL
@@ -267,6 +281,22 @@ xmap <leader>s <Plug>SlimeRegionSend
 " imap <buffer> <localleader>p <Esc>A\|>
 
 " R --------------------------------------------------------------------------
+
+" Fix issue with vim-slime paragraphs
+function! _EscapeText_r(text)
+  call system("cat > ./.slime", a:text)
+  return ["source('./.slime', echo = TRUE, max.deparse.length = 4095)\r"]
+endfunction
+
+" Split and Slime REPL
+function! R()
+    split
+    resize 10
+    terminal radian
+    $
+    call SlimeOverrideConfig()
+endfunction
+command! R call R()
 
 " Nvim-R
 let R_assign = 0
