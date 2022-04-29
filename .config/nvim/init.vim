@@ -3,17 +3,9 @@
 " Leader
 let mapleader = ","
 let maplocalleader = ";"
-
 " Normal
-" Switch buffer
-nnoremap <leader>b <C-6>
-" Fuzzyfind
-nnoremap <leader>f :Files<CR>
-" Quit
 nnoremap <leader>q ZZ
-" Write
 nnoremap <leader>w :w<CR>
-
 " Insert
 inoremap jj <Esc>
 autocmd InsertLeave * write
@@ -22,27 +14,28 @@ autocmd InsertLeave * write
 
 " Split and Slime REPL
 function! Terminal()
-    split
-    resize 10
-    terminal 
+    vsplit
+    terminal
     $
     call SlimeOverrideConfig()
 endfunction
 command! Terminal call Terminal()
 
-" Stop insert mode when leaving
-autocmd BufLeave term://* stopinsert
-" Always start in insert mode
-" autocmd BufWinEnter,WinEnter term://* startinsert
-" Hide line numbers
-autocmd TermOpen * setlocal nonumber norelativenumber
-" Exit to normal mode with <Enter> or jj
-" tnoremap <Enter> <C-\><C-n>
-tnoremap jj <C-\><C-n>
-" Split and term
-command! Zsh split | resize 10 | term
+" Split and Slime REPL
+function! Fish()
+    vsplit
+    vertical resize 60
+    terminal fish
+    $
+    call SlimeOverrideConfig()
+endfunction
+command! Fish call Fish()
 
-" Option ---------------------------------------------------------------------
+" autocmd BufLeave term://* stopinsert
+" autocmd TermOpen * setlocal nonumber norelativenumber
+tnoremap jj <C-\><C-n>
+
+" Option -----------------------------------------------------------------------
 
 " Carry over indenting from previous line
 set autoindent
@@ -102,6 +95,8 @@ set matchtime=2
 set modelines=5
 " No line numbers to start
 set number
+" Relative lines
+set relativenumber
 " Signs in number column
 set signcolumn=number
 " No flashing or beeping at all
@@ -183,232 +178,151 @@ set noswapfile
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'airblade/vim-rooter'
-Plug 'arcticicestudio/nord-vim'
-Plug 'ayu-theme/ayu-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'folke/todo-comments.nvim'
+Plug 'hzchirs/vim-material'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'jalvesaq/Nvim-R', {'branch': 'stable', 'for': ['r', 'rmd', 'rnoweb']}
-Plug 'jpalardy/vim-slime'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-emoji'
-Plug 'mllg/vim-devtools-plugin', { 'for': ['r', 'rmd', 'rnoweb']}
+Plug 'kassio/neoterm'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'rakr/vim-one'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
-" Plugin config --------------------------------------------------------------
+" Telescope -------------------------------------------------------------------
 
-autocmd VimEnter * Limelight " autocmd TermOpen * Limelight!
+lua << EOF
+require('telescope').setup {
+  defaults = {
+      file_ignore_patterns = {"%.git", "env", "renv"}
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    }
+  }
+}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
+EOF
+
+nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Todo ------------------------------------------------------------------------
+
+lua << EOF
+  require("todo-comments").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
+
+" Treesitter -------------------------------------------------------------------
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = {
+        "bash",
+        "dockerfile",
+        "fish",
+        "json",
+        "julia",
+        "markdown",
+        "python",
+        "r",
+        "yaml"
+    },
+    highlight = {
+        enable = true,
+    },
+    indent = {
+        enable = true
+    }
+}
+
+local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+ft_to_parser.qmd = 'markdown'
+ft_to_parser.rmd = 'markdown'
+EOF
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+" Other plugins ---------------------------------------------------------------
+
 " root projects based on .git folder
 let g:rooter_patterns = ['.git']
-" config treesitter
-luafile ~/.config/nvim/treesitter.lua
 " config coc
 source ~/.config/nvim/coc.vim
 
-" fzf
-" Show hidden files and follow symbolic links
-" let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-let $FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-" Fullscreen reverse layout
-let $FZF_DEFAULT_OPTS='--height 100% --layout=reverse --border'
-
-" set Goyo to 100% height
-let g:goyo_height = 100
-
-" Python -----------------------------------------------------------------------
-
-let g:slime_python_ipython = 1
-
 " Julia ------------------------------------------------------------------------
 
-" Split and Slime REPL
-function! Julia()
-    split
-    resize 10
-    terminal julia
-    $
-    call SlimeOverrideConfig()
-endfunction
-command! Julia call Julia()
-
-" Auto replace LaTeX
 let g:latex_to_unicode_auto = 1
-let g:latex_to_unicode_tab = "off"
 let g:latex_to_unicode_file_types = ["julia", "jmd"]
+let g:latex_to_unicode_tab = "off"
 
-function! JuliaActivate(env)
-    cmd = printf(":!julia import Pkg; Pkg.activate('%s')", a:env)
-    execute cmd
-endfunction
-command! JuliaActivate call JuliaActivate()
+" Neoterm ----------------------------------------------------------------------
 
-function! JuliaWeave()
-    cmd = printf(":!julia import Weave; Weave.weave('%s')", @%)
-    execute cmd
-endfunction
-command! JuliaWeave call JuliaWeave()
+let g:neoterm_bracketed_paste = 1
+let g:neoterm_default_mod = "vertical"
+nmap s <Plug>(neoterm-repl-send)
+nmap sa :TREPLSendFile<Enter>
+nmap sl :TREPLSendLine<Enter>
+xmap ss :TREPLSendSelection<Enter>
 
-" Slime ------------------------------------------------------------------------
-
-" Set job to current terminal
-function SlimeOverrideConfig()
-  let l:job_id = trim(execute(":echo b:terminal_job_id"))
-  wincmd p
-  let b:slime_config = {}
-  let b:slime_config["jobid"] = job_id
-endfunction
-
-" Delimit cells
-let g:slime_cell_delimiter = "```"
-" Don't ask default
-let g:slime_dont_ask_default = 1
-" Target neovim
-let g:slime_target = "neovim"
-" Remove default mappings
-let g:slime_no_mappings = 1
-" Map sends
-nmap <leader>c <Plug>SlimeSendCell
-nmap <leader>l <Plug>SlimeLineSend
-nmap <leader>p <Plug>SlimeParagraphSend
-xmap <leader>s <Plug>SlimeRegionSend
-" Map syntax
-" imap <buffer> <localleader>p <Esc>A\|>
-
-" R --------------------------------------------------------------------------
-
-" Fix issue with vim-slime paragraphs
-function! _EscapeText_r(text)
-  call system("cat > ./.slime", a:text)
-  return ["source('./.slime', echo = TRUE, max.deparse.length = 4095)\r"]
-endfunction
-
-" Split and Slime REPL
-function! R()
-    split
-    resize 10
-    terminal radian
-    $
-    call SlimeOverrideConfig()
-endfunction
-command! R call R()
-
-" Nvim-R
-let R_assign = 0
-let R_hi_fun = 0
-let R_min_editor_height = 80
-let r_indent_align_args = 0
-let R_assign_map = "–"
-let R_non_r_compl = 0
-let R_rconsole_height = 7
-let R_min_editor_width = 80
-let r_indent_align_args = 0
-let rrst_syn_hl_chunk = 1
-let R_setwidth = 0
-let R_nvimpager = "tab"
-let rmd_syn_hl_chunk = 1
-let R_nvim_wd = 1
-let R_app = "radian"
-let R_cmd = "R"
-" let R_csv_app = 'terminal:vd'
-let R_hl_term = 0
-let R_args = []
-let R_bracketed_paste = 1
-let R_close_term = 1
-" Use Treesitter for syntax highlighting
-let R_hi_fun = 0
-" Use RLanguageserver
-let R_set_omnifunc = ["rnoweb", "rhelp", "rrst"]
-
-" RStudio like sections
-function! s:fillLine( str )
-    " set tw to the desired total length
-    let tw = 80 " &textwidth - 40
-    if tw==0 | let tw = 80 | endif
-    " strip trailing spaces first
-    .s/[[:space:]]*$//
-    " calculate total number of 'str's to insert
-    let reps = (tw - col("$")) / len(a:str)
-    " insert them, if there's room, removing trailing spaces
-    " (though forcing there to be one)
-    if reps > 0
-        .s/$/\=(' '.repeat(a:str, reps))/
-    endif
-endfunction
+" R ----------------------------------------------------------------------------
 
 " Setup
-augroup r_setup
+augroup R
     autocmd!
-    " Fix assignment operator
-    autocmd FileType r,rmd inoremap <buffer> <localleader>a <Esc><cmd>normal! a <- <CR>a
-    " Fix pipe operator
-    autocmd FileType r,rmd inoremap <buffer> <localleader>m <Esc><cmd>normal! A \|><CR>a
-    " Sections like RStudio
-    autocmd FileType r inoremap <buffer> ## <esc><cmd>call <SID>fillLine( '-' )<CR>o<C-U><CR>
-    autocmd FileType r inoremap <buffer> *** <esc><cmd>call <SID>fillLine( '*' )<CR>o<C-U>
-    " Repeat # on <Enter>
-    autocmd FileType r setlocal formatoptions-=t formatoptions+=croql
-    " Use Pandoc bib completion for knitr chunk options
-    autocmd FileType rmd set completefunc=pandoc#completion#Complete
-    " Set custom shiftwidth for R
-    autocmd FileType r,rmd setlocal sw=2
-    " Turn off diagnostic
-    autocmd FileType r,rmd call CocAction('diagnosticToggle')
+    autocmd FileType R,Rmd call CocAction('diagnosticToggle')
+    autocmd FileType R,Rmd inoremap <buffer> <localleader>a <Esc><cmd>normal! a <- <CR>a
+    autocmd FileType R,Rmd inoremap <buffer> <localleader>m <Esc><cmd>normal! a \|><CR>a
+    autocmd FileType R,Rmd setlocal sw=2
 augroup END
 
-command! RLoad execute printf(":RSend devtools::load_all()")
-command! RMake execute printf(":RSend devtools::document(); devtools::build()")
-command! RReload execute printf(":RSend detach('package:%s', unload = TRUE); library(%s)", fnamemodify(getcwd(), ':t'), fnamemodify(getcwd(), ':t'))
-command! RmdRender execute printf(":RSend rmarkdown::render('%s')", @%)
+" Splits ----------------------------------------------------------------------
 
-" Split ----------------------------------------------------------------------
-
-" Remap splits navigation to just CTRL + hjkl
+set equalalways
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Make adjusing split sizes a bit more friendly
-noremap <silent> <C-Left> :vertical resize +2<CR>
-noremap <silent> <C-Right> :vertical resize -2<CR>
-noremap <silent> <C-Up> :resize +2<CR>
-noremap <silent> <C-Down> :resize -2<CR>
+" Status bar ------------------------------------------------------------------
 
-" Removes pipes | that act as seperators on splits
-" set fillchars+=vert:\
+let g:airline_section_x = ""
+let g:airline_section_y = ""
+let g:airline_section_z = '%{strftime("%c")}'
 
-" Theme ----------------------------------------------------------------------
+" Theme -----------------------------------------------------------------------
 
-" Enable highlighting
-set termguicolors
-" Enable syntax
 syntax enable
-
-" Set theme based on time of day
-let hr = (strftime('%H'))
-if hr >= 18
-    let ayucolor="mirage"
-    let g:airline_theme="ayu_mirage"
-elseif hr >= 6
-    let ayucolor="light"
-    let g:airline_theme="ayu_light"
-elseif hr >= 0
-    let ayucolor="dark"
-    let g:airline_theme="ayu_dark"
-endif
-colorscheme ayu
-
+:let &background = strftime("%H") < 17 ? "light" : "dark"
+colorscheme solarized
+let g:airline_theme='solarized'
 set cursorline
-augroup cursorline
-  au!
-  au ColorScheme * hi clear CursorLine
-               \ | hi link CursorLine CursorColumn
-augroup END
-" Thin split separators
 highlight WinSeparator guibg=None
+
+" Number of preceding/following paragraphs to include (default: 0)
+autocmd VimEnter * Limelight
+let g:limelight_paragraph_span = 0
+let g:limelight_conceal_ctermfg = 245  " Solarized Base1
+let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1

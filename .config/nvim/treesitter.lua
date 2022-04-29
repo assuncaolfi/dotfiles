@@ -2,6 +2,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {
       "bash",
       "dockerfile",
+      "fish",
       "json",
       "julia",
       "markdown",
@@ -18,4 +19,5 @@ require'nvim-treesitter.configs'.setup {
 }
 
 local ft_to_parser = require('nvim-treesitter.parsers').filetype_to_parsername
+ft_to_parser.qmd = 'markdown'
 ft_to_parser.rmd = 'markdown'

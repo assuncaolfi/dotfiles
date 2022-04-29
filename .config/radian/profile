@@ -1,5 +1,5 @@
 options(
-  radian.color_scheme = "zenburn",
-  radian.complete_while_typing = FALSE,
+  radian.color_scheme = "solarized",
+  radian.complete_while_typing = TRUE,
   radian.editing_mode = "vi"
 )

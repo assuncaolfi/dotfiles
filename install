@@ -3,27 +3,28 @@
 # brew
 /bin/bash -c \
   "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew tap \
+    homebrew/cask-fonts \
+    jason0x43/homebrew-neovim-nightly
 brew install \
     fd \
     neovim-nightly \
     pandoc \
-    python3
-brew tap \
-    homebrew/cask-fonts \
-    jason0x43/homebrew-neovim-nightly
+    python3 \
+    ripgrep
 brew install --cask \
+    chrome \
     iterm2 \
-    font-fira-code \
+    font-fira-code-nerd-font \
     julia \
-    qutebrowser \
     r
 
 # configs
-# mkdir ~/.config
+# TODO: Julia startup
 ln -s $PWD/.zshrc ~/.zshrc
 ln -s $PWD/.config ~/.config
 nvim  +PlugInstall +qall
-nvim +CocInstall coc-julia coc-r +qall
+nvim +CocInstall coc-julia coc-pairs coc-r +qall
 
 # defaults
 defaults write -g InitialKeyRepeat -int 10
@@ -31,7 +32,12 @@ defaults write -g KeyRepeat -int 1
 
 # pip
 pip3 install -U \
-  nord-pygments \
-  radian
+  radian \
+  pygments-solarized
 
 reboot
+
+# NOTE: Install Chrome extensions:
+# Marinara
+# SurfingKeys
+# uBlock Origin
