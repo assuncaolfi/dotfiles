@@ -1,3 +1,4 @@
 *.sw*
 *.tidal
 .nvimlog
+.config/coc
