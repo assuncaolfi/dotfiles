@@ -286,6 +286,8 @@ nmap s <Plug>(neoterm-repl-send)
 nmap sa :TREPLSendFile<Enter>
 nmap sl :TREPLSendLine<Enter>
 xmap ss :TREPLSendSelection<Enter>
+let g:neoterm_term_per_tab = 1
+let g:neoterm_keep_term_open = 0
 
 " R ----------------------------------------------------------------------------
 
