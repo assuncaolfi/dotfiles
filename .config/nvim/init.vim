@@ -13,6 +13,7 @@ tnoremap jj <C-\><C-n>
 
 " Option -----------------------------------------------------------------------
 
+set clipboard=unnamed
 " Carry over indenting from previous line
 set autoindent
 " Use smart indention
@@ -255,8 +256,8 @@ let g:latex_to_unicode_tab = "off"
 
 " Neoterm ----------------------------------------------------------------------
 
-# let g:neoterm_bracketed_paste = 1
-g:neoterm_repl_r='radian'
+" let g:neoterm_bracketed_paste = 1
+let g:neoterm_repl_r='radian'
 let g:neoterm_default_mod = "vertical"
 let g:neoterm_keep_term_open = 0
 let g:neoterm_term_per_tab = 1
