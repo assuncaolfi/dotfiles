@@ -8,31 +8,7 @@ nnoremap <leader>q ZZ
 nnoremap <leader>w :w<CR>
 " Insert
 inoremap jj <Esc>
-autocmd InsertLeave * write
-
-" Terminal ---------------------------------------------------------------------
-
-" Split and Slime REPL
-function! Terminal()
-    vsplit
-    terminal
-    $
-    call SlimeOverrideConfig()
-endfunction
-command! Terminal call Terminal()
-
-" Split and Slime REPL
-function! Fish()
-    vsplit
-    vertical resize 60
-    terminal fish
-    $
-    call SlimeOverrideConfig()
-endfunction
-command! Fish call Fish()
-
-" autocmd BufLeave term://* stopinsert
-" autocmd TermOpen * setlocal nonumber norelativenumber
+" Terminal
 tnoremap jj <C-\><C-n>
 
 " Option -----------------------------------------------------------------------
@@ -176,11 +152,11 @@ set noswapfile
 
 " call
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'Pocco81/AutoSave.nvim'
 Plug 'JuliaEditorSupport/julia-vim'
 Plug 'airblade/vim-rooter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'folke/todo-comments.nvim'
-Plug 'hzchirs/vim-material'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -191,7 +167,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'rakr/vim-one'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -280,14 +255,17 @@ let g:latex_to_unicode_tab = "off"
 
 " Neoterm ----------------------------------------------------------------------
 
-let g:neoterm_bracketed_paste = 1
+# let g:neoterm_bracketed_paste = 1
+g:neoterm_repl_r='radian'
 let g:neoterm_default_mod = "vertical"
+let g:neoterm_keep_term_open = 0
+let g:neoterm_term_per_tab = 1
 nmap s <Plug>(neoterm-repl-send)
-nmap sa :TREPLSendFile<Enter>
+" Send Markdown code chunk
+nmap sc /```{<CR>NjV/```\n<CR>k<Plug>(neoterm-repl-send)<CR>/```<CR>
+nmap sf :TREPLSendFile<Enter>
 nmap sl :TREPLSendLine<Enter>
 xmap ss :TREPLSendSelection<Enter>
-let g:neoterm_term_per_tab = 1
-let g:neoterm_keep_term_open = 0
 
 " R ----------------------------------------------------------------------------
 
@@ -313,6 +291,7 @@ nnoremap <C-l> <C-w>l
 let g:airline_section_x = ""
 let g:airline_section_y = ""
 let g:airline_section_z = '%{strftime("%c")}'
+let g:airline_powerline_fonts = 1
 
 " Theme -----------------------------------------------------------------------
 

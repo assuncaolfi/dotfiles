@@ -5,3 +5,6 @@ precmd() {
 fi
 
 export PATH=$(brew --prefix)/smlnj/bin:"$PATH"
+export PATH="/Applications/SuperCollider.app/Contents/MacOS/:$PATH"
+
+[ -f "/Users/luis.assuncao/.ghcup/env" ] && source "/Users/luis.assuncao/.ghcup/env" # ghcup-env
