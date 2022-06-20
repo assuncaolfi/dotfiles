@@ -177,8 +177,8 @@ call plug#end()
 
 " Leap -------------------------------------------------------------------------
 
-nmap f <Plug>Lightspeed_s
-nmap F <Plug>Lightspeed_S
+nmap s <Plug>Lightspeed_s
+nmap S <Plug>Lightspeed_S
 
 " Telescope -------------------------------------------------------------------
 
@@ -257,26 +257,29 @@ source ~/.config/nvim/coc.vim
 " Julia ------------------------------------------------------------------------
 
 let g:latex_to_unicode_auto = 1
-let g:latex_to_unicode_file_types = ["julia", "jmd"]
+let g:latex_to_unicode_file_types = ".*"
 let g:latex_to_unicode_tab = "off"
 
 " Neoterm ----------------------------------------------------------------------
 
 " let g:neoterm_bracketed_paste = 1
-let g:neoterm_repl_r='radian'
+let g:neoterm_autoscroll = 1
 let g:neoterm_default_mod = "vertical"
 let g:neoterm_keep_term_open = 0
+let g:neoterm_repl_r = "radian"
 let g:neoterm_term_per_tab = 1
-nmap s <Plug>(neoterm-repl-send)
+
+nmap <leader>s <Plug>(neoterm-repl-send)
 " Send Markdown code chunk
-nmap sc /```{<CR>NjV/```\n<CR>k<Plug>(neoterm-repl-send)<CR>/```<CR>
-nmap sf :TREPLSendFile<Enter>
-nmap sl :TREPLSendLine<Enter>
-xmap ss :TREPLSendSelection<Enter>
+nmap <leader>sc mc/```{<CR>NjV/```\n<CR>k<Plug>(neoterm-repl-send)<CR>/```<CR>`c
+nmap <leader>sf :TREPLSendFile<Enter>
+nmap <leader>sl :TREPLSendLine<Enter>
+nmap <leader>sp mp<Plug>(neoterm-repl-send)ip`p
+nmap <leader>sw mw<Plug>(neoterm-repl-send)iw`w
+xmap <leader>ss :TREPLSendSelection<Enter>
 
 " R ----------------------------------------------------------------------------
 
-" Setup
 augroup R
     autocmd!
     autocmd FileType R,Rmd call CocAction('diagnosticToggle')
@@ -285,13 +288,42 @@ augroup R
     autocmd FileType R,Rmd setlocal sw=2
 augroup END
 
-" Splits ----------------------------------------------------------------------
+" Fold -------------------------------------------------------------------------
+
+function! CustomFoldText()
+  " get first non-blank line
+  let fs = v:foldstart
+  while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
+  endwhile
+  if fs > v:foldend
+      let line = getline(v:foldstart)
+  else
+      let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+  endif
+  let expansionString = repeat(" ", 80 - strwidth(line))
+  return line . expansionString . "+" . "   "
+endfunction
+
+" set nofoldenable
+" set foldlevel=99
+" set fillchars=fold:\
+set foldtext=CustomFoldText()
+
+" Split ------------------------------------------------------------------------
 
 set equalalways
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+inoremap <C-h> <Esc><C-w>hi
+inoremap <C-j> <Esc><C-w>ji
+inoremap <C-k> <Esc><C-w>ki
+inoremap <C-l> <Esc><C-w>li
+tnoremap <C-h> <C-\><C-n><C-w>hi
+tnoremap <C-j> <C-\><C-n><C-w>ji
+tnoremap <C-k> <C-\><C-n><C-w>ki
+tnoremap <C-l> <C-\><C-n><C-w>li
 
 " Status bar ------------------------------------------------------------------
 
@@ -310,7 +342,7 @@ set cursorline
 highlight WinSeparator guibg=None
 
 " Number of preceding/following paragraphs to include (default: 0)
-autocmd VimEnter * Limelight
+" autocmd VimEnter * Limelight
 let g:limelight_paragraph_span = 0
 let g:limelight_conceal_ctermfg = 245  " Solarized Base1
 let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
