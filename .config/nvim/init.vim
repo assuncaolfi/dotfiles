@@ -4,188 +4,226 @@
 let mapleader = ","
 let maplocalleader = ";"
 " Normal
-nnoremap <leader>q ZZ
+nnoremap <leader>q :bd!<CR>
 nnoremap <leader>w :w<CR>
 " Insert
 inoremap jj <Esc>
 " Terminal
 tnoremap jj <C-\><C-n>
 
-" Option -----------------------------------------------------------------------
+augroup rc
+au!
+au TermOpen * setlocal nobuflisted
+augroup END
 
-set clipboard=unnamed
-" Carry over indenting from previous line
-set autoindent
-" Use smart indention
-set smartindent
-" Allow backspace beyond insertion point
-set backspace=indent,eol,start
-" Automatic program indenting
-set cindent
-" Comments don't fiddle with indenting
-set cinkeys-=0#
-" See :h cinoptions-values
-set cinoptions=
-" When folds are created, add them to this
-set commentstring=\ \ #%s
-" UTF-8 by default
-set encoding=utf-8
-" UTF-8 by default
-scriptencoding utf-8
-" No tabs
-set expandtab
-" Prefer Unix
-set fileformats=unix,dos,mac
-" Unicode chars for diffs/folds, and rely on Colors for window borders
-set fillchars=vert:\ ,stl:\ ,stlnc:\ ,fold:-,diff:┄
-" Use braces by default
-set foldmethod=marker
-" 120 is the new 80
-set textwidth=80
-" Format text
-set formatoptions=tcqn1
-" Show wrap line
-set colorcolumn=+1
-" How many lines of history to save
-set history=1000
-" Hilight searching
-set hlsearch
-" Case insensitive
-set ignorecase
-" live search substitution
-set inccommand=nosplit
-" Search as you type
-set incsearch
-" Completion recognizes capitalization
-set infercase
-" Global status bar
-set laststatus=3
-" Break long lines by word, not char
-set linebreak
-" Show whitespace as special chars - see listchars
-set list
-" Unicode characters for various things
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:¶,trail:·
-" Tenths of second to hilight matching paren
-set matchtime=2
-" How many lines of head & tail to look for ml's
-set modelines=5
-" No line numbers to start
-set number
-" Relative lines
-set relativenumber
-" Signs in number column
-set signcolumn=number
-" No flashing or beeping at all
-set visualbell t_vb=
-" A4 paper
-set printoptions=paper:A4
-" Hide row/col and percentage
-set noruler
-" Hise command line infos
-set noshowcmd
-" Number of lines to scroll with ^U/^D
-set scroll=4
-" Keep cursor away from this many chars top/bot
-set scrolloff=999
-" Enable mouse support
-set mouse=a
-" Don't save runtimepath in Vim session (see tpope/vim-pathogen docs)
-set sessionoptions-=options
-" Shift to certain columns, not just n spaces
-set shiftround
-" Number of spaces to shift for autoindent or >,<
-set shiftwidth=4
-" Hide Omnicomplete messages
-set shortmess+=c
-" Show for lines that have been wrapped, like Emacs
-set showbreak=
-" Showmatch Hilight matching braces/parens/etc.
-set showmatch
-" Turn off show mode (showed by lightline)
-set noshowmode
-" Keep cursor away from this many chars left/right
-set sidescrolloff=3
-" Lets you search for ALL CAPS
-set smartcase
-" Spaces 'feel' like tabs
-set softtabstop=4
-" Ignore these files when tab-completing
-set suffixes+=.pyc
-" The One True Tab
-set tabstop=4
-" Don't set the title of the Vim window
-set notitle
-" Disable conceal
-set conceallevel=0
-" Disable omnicompletion preview
-set completeopt=menuone,noselect,noinsert
-" Ignore certain files in tab-completion
-set wildignore=*.class,*.o,*~,*.pyc,.git,.DS_Store
-" Make splits defaut to below ...
-set splitbelow
-" ... and to the right
+" Options ----------------------------------------------------------------------
+
+set number                          " No line numbers to start
+set relativenumber                  " Relative lines
+
+filetype plugin indent on           " Essential for filetype plugins
+scriptencoding utf-8                " UTF-8 by default
+set autoindent                      " Carry over indenting from previous line
+set autowriteall                    " Autosave
+set backupdir=$HOME/iCloud/Vim/backup   " Backup file dir
+set cindent                         " Automatic program indenting
+set cinkeys-=0#                     " Comments don't fiddle with indenting
+set clipboard=unnamed               " Copy from and to the global clipboard
+set cmdheight=0                     " Cmd only shows when typing
+set colorcolumn=+1                  " Show wrap line
+set directory=$HOME/iCloud/Vim/swap " Swap file dir
+set encoding=utf-8                  " UTF-8 by default
+set expandtab                       " No tabs
+set fillchars=vert:\ ,fold:\ 
+set history=1000                    " How many lines of history to save
+set ignorecase                      " Case insensitive
+set inccommand=nosplit              " live search substitution
+set incsearch                       " Search as you type
+set infercase                       " Completion recognizes capitalization
+set laststatus=3                    " Global status bar
+set linebreak                       " Break long lines by word, not char
+set list                            " Show whitespace as special chars
+set listchars=trail:·
+set matchtime=2                     " Time hilight matching parenthesis
+set mouse=a                         " Support mouse
+set nohlsearch                      " Turn off search highlighting
+set noswapfile                      " No swap
+set scrolloff=999                   " Keep cursor away from top/bottom
+set sessionoptions-=options         " Don't save runtimepath in Vim session
+set shiftround                      " Shift to certain columns
+set shiftwidth=4                    " Number of spaces to shift
+set showbreak=                      " Identify wrapped lines
+set showmatch                       " Show matches
+set signcolumn=number               " Signs in number column
+set smartcase                       " Lets you search for ALL CAPS
+set smartindent                     " Use smart indention
+set softtabstop=4                   " Spaces feel like tabs
+set tabstop=4                       " Tabs = 4 spaces
+set textwidth=80                    " Column width
+set undodir=$HOME/iCloud/Vim/undo   " Undo file dir
+set undofile                        " Enable persistent undo
+set updatetime=1000                 " Set update time
 set splitright
-" Always hide tabline
-set showtabline=0
-" Essential for filetype plugins
-filetype plugin indent on
-" Make sure the original file is overwritten on save
-set backupcopy=yes
-" Backup file dir
-set backupdir=$HOME/iCloud/Vim/backup
-" Swap file dir
-set directory=$HOME/iCloud/Vim/swap
-" Enable persistent undo
-set undofile
-" Undo file dir
-set undodir=$HOME/iCloud/Vim/undo
-" Turn off modeline support
-set nomodeline
-" Set update time
-set updatetime=1000
-" Autosave
-set autowriteall
-" No swap
-set noswapfile
 
-" Plugin ---------------------------------------------------------------------
+"  TODO: Revise
+"" Ignore these files when tab-completinginit
+"set suffixes+=.pyc
+"" Allow backspace beyond insertion point
+"" set backspace=indent,eol,start
+"" Turn off show mode (showed by lightline)
+"set noshowmode
+"" See :h cinoptions-values
+"set cinoptions=
+"" When folds are created, add them to this
+"set commentstring=\ \ #%s
+"" Prefer Unix
+"set fileformats=unix,dos,mac
+"" Use braces by default
+"set foldmethod=marker
+"" Format text
+"set formatoptions=tcqn1
+"" How many lines of head & tail to look for ml's
+"set modelines=5
+"" No flashing or beeping at all
+"set visualbell t_vb=
+"" A4 paper
+"set printoptions=paper:A4
+"" Hide row/col and percentage
+"set noruler
+"" Hise command line infos
+"set noshowcmd
+"" Number of lines to scroll with ^U/^D
+"set scroll=4
+"" Hide Omnicomplete messages
+"set shortmess+=c
+"" Keep cursor away from this many chars left/right
+"set sidescrolloff=3
+"" Don't set the title of the Vim window
+"set notitle
+"" Disable conceal
+"set conceallevel=0
+"" Disable omnicompletion preview
+"set completeopt=menuone,noselect,noinsert
+"" Ignore certain files in tab-completion
+"set wildignore=*.class,*.o,*~,*.pyc,.git,.DS_Store
+"" Make splits defaut to below ...
+"set splitbelow
+"" ... and to the right
+"" Make sure the original file is overwritten on save
+"set backupcopy=yes
+"" Turn off modeline support
+"set nomodeline
 
-" call
+" Plugin ---------------------------------------------------------------------------------------
+
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'Pocco81/AutoSave.nvim'
 Plug 'JuliaEditorSupport/julia-vim'
-Plug 'airblade/vim-rooter'
+Plug 'Pocco81/AutoSave.nvim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'folke/todo-comments.nvim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'ggandor/leap.nvim'
+Plug 'iamcco/markdown-preview.nvim', {'do': {-> mkdp#util#install()}, 'for': ['markdown', 'vim-plug']}
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-emoji'
-Plug 'kassio/neoterm'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'stevearc/aerial.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ggandor/lightspeed.nvim'
 call plug#end()
 
-" Leap -------------------------------------------------------------------------
+" Aesthetics -------------------------------------------------------------------
 
-nmap s <Plug>Lightspeed_s
-nmap S <Plug>Lightspeed_S
+syntax enable
+:let &background = strftime("%H") < 17 ? "light" : "dark"
+colorscheme solarized
 
-" Telescope -------------------------------------------------------------------
+" autocmd VimEnter * Limelight
+highlight WinSeparator guibg=None
+let g:airline_theme='solarized'
+let g:limelight_conceal_ctermfg = 245  " Solarized Base1
+let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
+let g:limelight_paragraph_span = 0
+set cursorline
+
+" aerial -----------------------------------------------------------------------
+
+" lua << EOF
+" require("aerial").setup({
+"   on_attach = function(bufnr)
+"     -- Toggle the aerial window with <leader>a
+"     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>a', '<cmd>AerialToggle!<CR>', {})
+"     -- Jump forwards/backwards with '{' and '}'
+"     vim.api.nvim_buf_set_keymap(bufnr, 'n', '{', '<cmd>AerialPrev<CR>', {})
+"     vim.api.nvim_buf_set_keymap(bufnr, 'n', '}', '<cmd>AerialNext<CR>', {})
+"     -- Jump up the tree with '[[' or ']]'
+"     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[[', '<cmd>AerialPrevUp<CR>', {})
+"     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']]', '<cmd>AerialNextUp<CR>', {})
+"   end
+" })
+" EOF
+
+" lualine ----------------------------------------------------------------------
+
+lua << EOF
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'solarized_light',
+    component_separators = '',
+    section_separators = '',
+    disabled_filetypes = {},
+    always_divide_middle = true,
+    globalstatus = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_a = {'buffers'},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  extensions = {}
+}
+EOF
+
+" Leap -----------------------------------------------------------------------------------------
+
+lua require('leap').set_default_keymaps()
+
+" Telescope ------------------------------------------------------------------------------------
 
 lua << EOF
 require('telescope').setup {
   defaults = {
-      file_ignore_patterns = {"%.git", "env", "renv"}
+      file_ignore_patterns = {
+          "%.git",
+          "env",
+          "renv"
+    }
   },
   extensions = {
     fzf = {
@@ -244,39 +282,24 @@ ft_to_parser.qmd = 'markdown'
 ft_to_parser.rmd = 'markdown'
 EOF
 
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-
 " Other plugins ---------------------------------------------------------------
 
-" root projects based on .git folder
-let g:rooter_patterns = ['.git']
 " config coc
 source ~/.config/nvim/coc.vim
 
 " Julia ------------------------------------------------------------------------
 
-let g:latex_to_unicode_auto = 1
+let g:latex_to_unicode_auto = 0
 let g:latex_to_unicode_file_types = ".*"
-let g:latex_to_unicode_tab = "off"
+" let g:latex_to_unicode_tab = "off"
 
-" Neoterm ----------------------------------------------------------------------
+" REPL -------------------------------------------------------------------------
 
-" let g:neoterm_bracketed_paste = 1
-let g:neoterm_autoscroll = 1
-let g:neoterm_default_mod = "vertical"
-let g:neoterm_keep_term_open = 0
-let g:neoterm_repl_r = "radian"
-let g:neoterm_term_per_tab = 1
-
-nmap <leader>s <Plug>(neoterm-repl-send)
-" Send Markdown code chunk
-nmap <leader>sc mc/```{<CR>NjV/```\n<CR>k<Plug>(neoterm-repl-send)<CR>/```<CR>`c
-nmap <leader>sf :TREPLSendFile<Enter>
-nmap <leader>sl :TREPLSendLine<Enter>
-nmap <leader>sp mp<Plug>(neoterm-repl-send)ip`p
-nmap <leader>sw mw<Plug>(neoterm-repl-send)iw`w
-xmap <leader>ss :TREPLSendSelection<Enter>
+command! -nargs=1 REPL vsplit | terminal <f-args>
+nnoremap <leader>sl mt0Y<C-w>lpi<Enter><C-\><C-n><C-w>h`t
+nnoremap <leader>sp mtyip<C-w>lpi<Enter><C-\><C-n><C-w>h`t
+nnoremap <leader>sw mtyiw<C-w>lpi<Enter><C-\><C-n><C-w>h`t
+nnoremap <leader>sc mt/```{<CR>NjV/```\n<CR>ky<C-w>lpi<Enter><C-\><C-n><C-w>h`t
 
 " R ----------------------------------------------------------------------------
 
@@ -284,14 +307,13 @@ augroup R
     autocmd!
     autocmd FileType R,Rmd call CocAction('diagnosticToggle')
     autocmd FileType R,Rmd inoremap <buffer> <localleader>a <Esc><cmd>normal! a <- <CR>a
-    autocmd FileType R,Rmd inoremap <buffer> <localleader>m <Esc><cmd>normal! a \|><CR>a
+    autocmd FileType R,Rmd inoremap <buffer> <localleader>p <Esc><cmd>normal! a \|><CR>a
     autocmd FileType R,Rmd setlocal sw=2
 augroup END
 
 " Fold -------------------------------------------------------------------------
 
 function! CustomFoldText()
-  " get first non-blank line
   let fs = v:foldstart
   while getline(fs) =~ '^\s*$' | let fs = nextnonblank(fs + 1)
   endwhile
@@ -300,26 +322,26 @@ function! CustomFoldText()
   else
       let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
   endif
-  let expansionString = repeat(" ", 80 - strwidth(line))
-  return line . expansionString . "+" . "   "
+  let leftSpace = repeat(" ", 80 - strwidth(line))
+  return line . leftSpace . "+"
 endfunction
 
-" set nofoldenable
-" set foldlevel=99
-" set fillchars=fold:\
+set foldexpr=nvim_treesitter#foldexpr()
+set foldmethod=expr
 set foldtext=CustomFoldText()
+set nofoldenable
 
 " Split ------------------------------------------------------------------------
 
 set equalalways
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 inoremap <C-h> <Esc><C-w>hi
 inoremap <C-j> <Esc><C-w>ji
 inoremap <C-k> <Esc><C-w>ki
 inoremap <C-l> <Esc><C-w>li
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 tnoremap <C-h> <C-\><C-n><C-w>hi
 tnoremap <C-j> <C-\><C-n><C-w>ji
 tnoremap <C-k> <C-\><C-n><C-w>ki
@@ -327,22 +349,9 @@ tnoremap <C-l> <C-\><C-n><C-w>li
 
 " Status bar ------------------------------------------------------------------
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 let g:airline_section_x = ""
 let g:airline_section_y = ""
 let g:airline_section_z = '%{strftime("%c")}'
-let g:airline_powerline_fonts = 1
 
-" Theme -----------------------------------------------------------------------
-
-syntax enable
-:let &background = strftime("%H") < 17 ? "light" : "dark"
-colorscheme solarized
-let g:airline_theme='solarized'
-set cursorline
-highlight WinSeparator guibg=None
-
-" Number of preceding/following paragraphs to include (default: 0)
-" autocmd VimEnter * Limelight
-let g:limelight_paragraph_span = 0
-let g:limelight_conceal_ctermfg = 245  " Solarized Base1
-let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
